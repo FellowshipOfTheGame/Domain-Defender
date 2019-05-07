@@ -43,10 +43,10 @@ public class EnemyBehaviour : MonoBehaviour {
 		rBody.AddForce(impulseForce * impulseDirection , ForceMode2D.Impulse);
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	private void OnCollisionEnter2D(Collision2D other)
 	{
 		// Debug.Log("Collision");
-		if(other.tag == "Bullet")
+		if(other.gameObject.CompareTag("Bullet"))
 		{
 			TakeHit(other.transform.position);
 			Destroy(other.gameObject);

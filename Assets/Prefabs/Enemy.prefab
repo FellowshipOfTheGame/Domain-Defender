@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 58018358258147168}
   - component: {fileID: 114911357707929326}
   - component: {fileID: 50302071392772634}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -110,9 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e1b67a6187a0a4e941f364a4050315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  life: 20
-  impulseForce: 10
+  initialVerticalSpeed: -5
+  horizontalSpeedAmplitude: 3
+  life: 100
+  impulseForce: {x: 10, y: 20}
 --- !u!50 &50302071392772634
 Rigidbody2D:
   serializedVersion: 4
@@ -128,8 +129,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_GravityScale: 0.5
+  m_Material: {fileID: 6200000, guid: 7ddf38784cac5e14c96c6b842c52285d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
