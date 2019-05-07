@@ -6,22 +6,49 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	[SerializeField] private float initialVerticalSpeed;
 	[SerializeField] private float horizontalSpeedAmplitude;
-	// public float Speed {get {return speed;}}
+	[SerializeField] private float life;
+	[SerializeField] private Vector2 impulseForce;
+	
+	private Rigidbody2D rBody;
+	
+	public float Life 
+	{
+		get 
+		{
+			return life;
+		}
+		set
+		{
+			life = value;
+
+			if (value <= 0)
+			{
+				ScoreBoard.instance.OnEnemyDeath();
+				Destroy(this.gameObject);
+			}
+		}
+	}
 
 	// Use this for initialization
-	void Start ()
+	private void Start ()
 	{
-		GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-horizontalSpeedAmplitude, horizontalSpeedAmplitude), initialVerticalSpeed);
-		
+		rBody = GetComponent<Rigidbody2D>();
+		rBody.velocity = new Vector2(Random.Range(-horizontalSpeedAmplitude, horizontalSpeedAmplitude), initialVerticalSpeed);
+	}
+
+	public void TakeHit(Vector3 hitPosition)
+	{
+		Life -= 10;
+		Vector3 impulseDirection = this.transform.position - hitPosition;
+		rBody.AddForce(impulseForce * impulseDirection , ForceMode2D.Impulse);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("Collision");
+		// Debug.Log("Collision");
 		if(other.tag == "Bullet")
 		{
-			ScoreBoard.instance.OnEnemyDeath();
-			Destroy(this.gameObject);
+			TakeHit(other.transform.position);
 			Destroy(other.gameObject);
 		}
 	}

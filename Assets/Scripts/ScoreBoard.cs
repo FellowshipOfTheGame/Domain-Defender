@@ -12,12 +12,10 @@ public class ScoreBoard : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI scoreText;
 	private int score = 0;
 	
-	public int Score {
-		get{return score;}
-	}
+	public int Score { get{return score;} }
 
 	// Use this for initialization
-	void Awake () 
+	void Awake() 
 	{
 		// Singleton
 		if (instance == null) 
@@ -27,15 +25,6 @@ public class ScoreBoard : MonoBehaviour
 		else if (instance != this)
 		{
 			Destroy(this);
-		}
-	}
-
-	// Just debug
-	void Update () 
-	{
-		if (Input.GetMouseButtonDown(0)) 
-		{
-			OnEnemyDeath();
 		}
 	}
 
