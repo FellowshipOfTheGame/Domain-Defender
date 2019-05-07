@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-	[SerializeField] private float speed;
-	public float Speed {get {return speed;}}
+	[SerializeField] private float initialVerticalSpeed;
+	[SerializeField] private float horizontalSpeedAmplitude;
+	// public float Speed {get {return speed;}}
 
 	// Use this for initialization
 	void Start ()
 	{
-		GetComponent<Rigidbody2D>().velocity = Vector2.down * Speed;
+		GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-horizontalSpeedAmplitude, horizontalSpeedAmplitude), initialVerticalSpeed);
+		
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
