@@ -58,14 +58,21 @@ public class Movement : MonoBehaviour
             // Mouse Swipe
             // Gets click press position
             if (Input.GetMouseButtonDown(0))
+            {
+                // Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane);
+                // clickPress = Camera.main.ScreenToWorldPoint(mousePosition);
                 clickPress = Input.mousePosition;
+            }
 
             // Gets click release position, compare with press, and rotates if it's considered a swipe.
             if (Input.GetMouseButtonUp(0))
             {
+                // Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane);
+                // clickRelease = Camera.main.ScreenToWorldPoint(mousePosition);
                 clickRelease = Input.mousePosition;
 
-                float swipeDistance = clickRelease.x - clickPress.x;
+                float swipeDistance = (clickRelease.x - clickPress.x) * 50;
+                Debug.Log(swipeDistance);
 
                 if (swipeDistance < -minSwipeDistance)
                     Rotate(-rotationAngle);

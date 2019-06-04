@@ -15,11 +15,11 @@ public class Shoot : MonoBehaviour
     private bool canAttack = true;
 
     /// <summary>
-    /// Checks if the attack button was pressed
+    /// Checks if the attack button is pressed and attacks if it can attack
     /// </summary>
     private void Update()
     {
-        if (canAttack && Input.GetKey(KeyCode.Space))
+        if (canAttack && (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)))
             StartCoroutine(Attack());
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class Enemy : MonoBehaviour
     [HideInInspectorIfNot(nameof(split))]
     [Tooltip("This distance will be summed to the current distance from center to calculate the distance form center of the enemies instantiated on split")]
     [SerializeField] private float knockBackDistance;
-
+    [Tooltip("Nearest hexagon side")]
+    [SerializeField] private int lane;
     private Vector3 center = new Vector3(0f, 0f, 0f);
 
 
@@ -44,6 +46,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public int Lane
+    {
+        get { return lane; }
+
+        // Sets only if the new value is between 0 and 5 (inclusive)
+        set 
+        {
+            if (value >= 0 && value < 6)
+                lane = value;
+        }
+    }
+
     /// <summary>
     /// Moves the enemy in direction of the center
     /// </summary>
@@ -53,20 +67,11 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Detects game over condition (if an enemy hits the player)
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-            Debug.Log("Game Over");
-    }
-
-    /// <summary>
     /// Splits in two other enemies, that will spawn in the adjacent routes, a litte further from the center than this enemy is
     /// </summary>
     private void Split()
     {
+    /*
         // Gets data from this enemy position and rotation in relation to the center
         Vector3 enemyDirection = this.transform.position - center;
         float distanceFromCenter = enemyDirection.magnitude;
@@ -81,5 +86,37 @@ public class Enemy : MonoBehaviour
         newEnemyDirection = (Quaternion.Euler(0f, 0f, angle - 60f) * Vector3.up).normalized;
         spawnPosition = newEnemyDirection * (distanceFromCenter + knockBackDistance);
         Instantiate(splitResultEnemy, spawnPosition, Quaternion.identity);
+    */
+        
+        // Calculates the distance
+        float distanceFromCenter = (this.transform.position - center).magnitude;
+
+        // Instantiates one enemy left
+        int newEnemyLane = Mod(lane + 1, 6);
+        Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+        GameObject instance = Instantiate(splitResultEnemy, newEnemySpawn, Quaternion.identity);
+        instance.GetComponent<Enemy>().Lane = newEnemyLane;
+
+        // Instantiates one enemy right
+        newEnemyLane = Mod(lane - 1, 6);
+        newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+        instance = Instantiate(splitResultEnemy, newEnemySpawn, Quaternion.identity);
+        instance.GetComponent<Enemy>().Lane = newEnemyLane;
+    }
+
+    /// <summary>
+    /// Calculates modulus
+    /// </summary>
+    /// <param name="dividend"></param>
+    /// <param name="divisor"></param>
+    /// <returns>Result of the operation</returns>
+    private int Mod(int dividend, int divisor)
+    {
+        int result = dividend % divisor;
+        if (result < 0)
+            result += divisor;
+        return result;
     }
 }
