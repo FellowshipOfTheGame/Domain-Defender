@@ -35,5 +35,8 @@ public class ScoreBoard : MonoBehaviour
 	{
 		score++;
 		scoreText.text = "Score: " + score.ToString();
+
+		if (score % 10 == 0)
+			Spawner.instance.LevelUp();
 	}
 }

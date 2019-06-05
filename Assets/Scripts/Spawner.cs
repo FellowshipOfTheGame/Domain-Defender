@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     private Vector3[] spawns = new Vector3[6];
     private Vector3 center = new Vector3(0f, 0f, 0f);
+    private float timeBetweenSpawns = 3f;
 
     public Vector3[] Spawns => spawns;
 
@@ -35,6 +36,11 @@ public class Spawner : MonoBehaviour
         StartCoroutine(StartSpawner());
     }
 
+    public void LevelUp()
+    {
+        timeBetweenSpawns -= 0.1f;
+    }
+
     private IEnumerator StartSpawner()
     {
         while (true)
@@ -43,7 +49,7 @@ public class Spawner : MonoBehaviour
             int enemyIndex = Random.Range(0, enemyPrefabs.Length);
             GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawns[spawnIndex], Quaternion.identity);
             enemy.GetComponent<Enemy>().Lane = spawnIndex;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 }

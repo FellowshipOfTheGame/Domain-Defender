@@ -260,22 +260,22 @@ PrefabInstance:
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 9
+      value: -189
       objectReference: {fileID: 0}
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1
+      value: 646
       objectReference: {fileID: 0}
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -187.95
+      value: -432.6
       objectReference: {fileID: 0}
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -498.8
+      value: -1346.7
       objectReference: {fileID: 0}
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
@@ -316,6 +316,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -364.42517
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -182.21274
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -364.4253
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -159.43579
+      objectReference: {fileID: 0}
+    - target: {fileID: 114017662502836442, guid: f83560271940c984f9cc795c0a59cb55,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
       objectReference: {fileID: 0}
     - target: {fileID: 224289156506884290, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
@@ -369,8 +414,8 @@ Camera:
   m_GameObject: {fileID: 338651159}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -385,8 +430,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 5.8418093
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -953,7 +998,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -972,8 +1017,8 @@ Canvas:
   m_GameObject: {fileID: 1769353475}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 338651161}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1159,7 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f73d6d0bb552b34bba6b33b52650dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSwipeDistance: 1
+  minSwipeDistance: 700
   speed: 0.18
   inputToleranceAngle: 5
 --- !u!114 &7414091922838344727
