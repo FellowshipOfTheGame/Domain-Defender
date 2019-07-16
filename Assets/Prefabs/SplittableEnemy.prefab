@@ -95,10 +95,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   speed: 0.01
+  repositioningSpeed: 0.1
+  lane: 0
   split: 1
   splitResultEnemy: {fileID: 5606214294604898822, guid: 9d2b22dae2166924d84a6e296f4e6c71,
     type: 3}
   knockBackDistance: 3
+  trojanHorse: 0
 --- !u!61 &7186544672237272293
 BoxCollider2D:
   m_ObjectHideFlags: 0

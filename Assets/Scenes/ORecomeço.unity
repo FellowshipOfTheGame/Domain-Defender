@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -189
+      value: -189.00002
       objectReference: {fileID: 0}
     - target: {fileID: 224379495889572028, guid: f83560271940c984f9cc795c0a59cb55,
         type: 3}
@@ -483,6 +483,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 5606214294604898822, guid: 9d2b22dae2166924d84a6e296f4e6c71, type: 3}
   - {fileID: 7186544672237272289, guid: b5d8db340c3df5a428e7bda525c38038, type: 3}
+  - {fileID: 4002621636050489418, guid: aa212534160e00a419794a960a618e3d, type: 3}
 --- !u!1 &579349374
 GameObject:
   m_ObjectHideFlags: 0

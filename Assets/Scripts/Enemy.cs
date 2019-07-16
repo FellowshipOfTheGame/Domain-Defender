@@ -9,6 +9,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int life;
     [Tooltip("Enemy's speed")]
     [SerializeField] private float speed;
+    [Tooltip("Enemy's speed while going to its lane")]
+    [SerializeField] private float repositioningSpeed;
+    [Tooltip("Nearest hexagon side")]
+    [SerializeField] private int lane;
     [Tooltip("Indicates if the enemy splits or not when its life reaches 0")] 
     [SerializeField] private bool split;
 
@@ -19,9 +23,15 @@ public class Enemy : MonoBehaviour
     [HideInInspectorIfNot(nameof(split))]
     [Tooltip("This distance will be summed to the current distance from center to calculate the distance form center of the enemies instantiated on split")]
     [SerializeField] private float knockBackDistance;
-    [Tooltip("Nearest hexagon side")]
-    [SerializeField] private int lane;
-    private Vector3 center = new Vector3(0f, 0f, 0f);
+    [HideInInspectorIfNot(nameof(split))]
+    [Tooltip("If selected, it will split to all lanes on its death")]
+    [SerializeField] private bool trojanHorse;
+
+    private Vector3 center = Vector3.zero;
+    private bool movingToLane = false;
+    private Vector3 startPosition;
+
+    private Collider2D col;
 
 
     public int Life
@@ -59,11 +69,34 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the enemy in direction of the center
+    /// Moves the enemy in direction of the center, or to its start position
     /// </summary>
     private void FixedUpdate()
     {
-        this.transform.position = Vector3.MoveTowards(this.transform.position, center, speed);
+        if (movingToLane)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, startPosition, repositioningSpeed);
+            if ((this.transform.position - startPosition).magnitude < 0.1f)
+            {
+                movingToLane = false;
+                col.enabled = true;
+            }
+
+        }
+        else
+            this.transform.position = Vector3.MoveTowards(this.transform.position, center, speed);
+    }
+
+
+    public void MoveToLane(int lane, Vector3 position)
+    {
+        col = GetComponent<Collider2D>();
+        col.enabled = false;
+        
+        Lane = lane;
+        startPosition = position;
+        movingToLane = true;
+
     }
 
     /// <summary>
@@ -71,39 +104,39 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Split()
     {
-    /*
-        // Gets data from this enemy position and rotation in relation to the center
-        Vector3 enemyDirection = this.transform.position - center;
-        float distanceFromCenter = enemyDirection.magnitude;
-        float angle = -Vector3.Angle(enemyDirection, Vector3.up);
-        
-        // Calculates the first new enemy spawn position and instantiates it
-        Vector3 newEnemyDirection = (Quaternion.Euler(0f, 0f, angle + 60f) * Vector3.up).normalized;
-        Vector3 spawnPosition = newEnemyDirection * (distanceFromCenter + knockBackDistance);
-        Instantiate(splitResultEnemy, spawnPosition, Quaternion.identity);
-
-        // Does the same for the second new enemy
-        newEnemyDirection = (Quaternion.Euler(0f, 0f, angle - 60f) * Vector3.up).normalized;
-        spawnPosition = newEnemyDirection * (distanceFromCenter + knockBackDistance);
-        Instantiate(splitResultEnemy, spawnPosition, Quaternion.identity);
-    */
-        
-        // Calculates the distance
+        // Calculates the distance from the center
         float distanceFromCenter = (this.transform.position - center).magnitude;
 
-        // Instantiates one enemy left
-        int newEnemyLane = Mod(lane + 1, 6);
-        Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
-        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-        GameObject instance = Instantiate(splitResultEnemy, newEnemySpawn, Quaternion.identity);
-        instance.GetComponent<Enemy>().Lane = newEnemyLane;
+        if (!trojanHorse)
+        {
+            // Instantiates one enemy left
+            int newEnemyLane = Mod(lane + 1, 6);
+            Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+            newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+            GameObject instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+            instance.GetComponent<Enemy>().MoveToLane(newEnemyLane, newEnemySpawn);
 
-        // Instantiates one enemy right
-        newEnemyLane = Mod(lane - 1, 6);
-        newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
-        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-        instance = Instantiate(splitResultEnemy, newEnemySpawn, Quaternion.identity);
-        instance.GetComponent<Enemy>().Lane = newEnemyLane;
+            // Instantiates one enemy right
+            newEnemyLane = Mod(lane - 1, 6);
+            newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+            newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+            instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+            instance.GetComponent<Enemy>().MoveToLane(newEnemyLane, newEnemySpawn);
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (i != lane)
+                {
+                    int newEnemyLane = i;
+                    Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+                    newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+                    GameObject instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+                    instance.GetComponent<Enemy>().MoveToLane(newEnemyLane, newEnemySpawn);
+                }
+            }
+        }
     }
 
     /// <summary>
