@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Spawner : MonoBehaviour {
+public class SpawnerOld : MonoBehaviour {
 
 	[SerializeField] private GameObject enemyPrefab;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour 
+public class ProjectileOld : MonoBehaviour 
 {
 	private Rigidbody2D rBody;
 	[Tooltip("Proejctile speed")]

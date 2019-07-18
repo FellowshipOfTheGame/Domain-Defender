@@ -12,26 +12,31 @@ public class ScoreBoard : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI scoreText;
 	private int score = 0;
 	
-	public int Score { get{return score;} }
+	public int Score { get { return score; } }
 
-	// Use this for initialization
+	/// <summary>
+	/// Checks singleton condition and initializes the score displayed on screen
+	/// </summary>
 	void Awake() 
 	{
 		// Singleton
 		if (instance == null) 
-		{
 			instance = this;
-		}
 		else if (instance != this)
-		{
-			Destroy(this);
-		}
+			Destroy(this.gameObject);
+
+		scoreText.text = "Score: " + score.ToString();
 	}
 
-	// Updates score
+	/// <summary>
+	/// Updates score
+	/// </summary>
 	public void OnEnemyDeath ()
 	{
 		score++;
 		scoreText.text = "Score: " + score.ToString();
+
+		if (score % 10 == 0)
+			Spawner.instance.LevelUp();
 	}
 }
