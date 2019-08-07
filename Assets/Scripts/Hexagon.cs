@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Hexagon : MonoBehaviour
 {
+    [SerializeField] private bool hasShield;
+    
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
     /// </summary>
@@ -12,6 +14,17 @@ public class Hexagon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
-            SceneManager.LoadScene(0);
+        {
+            if (hasShield)
+            {
+                hasShield = false;
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+
+        }
     }
 }
