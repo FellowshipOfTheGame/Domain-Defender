@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
             if ((this.transform.position - startPosition).magnitude < 0.1f)
             {
                 movingToLane = false;
-                col.enabled = true;
+                // col.enabled = true;
             }
 
         }
@@ -90,8 +90,8 @@ public class Enemy : MonoBehaviour
 
     public void MoveToLane(int lane, Vector3 position)
     {
-        col = GetComponent<Collider2D>();
-        col.enabled = false;
+        // col = GetComponent<Collider2D>();
+        // col.enabled = false;
         
         Lane = lane;
         startPosition = position;
@@ -127,7 +127,7 @@ public class Enemy : MonoBehaviour
         {
             for (int i = 0; i < 6; i++)
             {
-                if (i != lane)
+                if (i != lane && i != (lane+3)%6)
                 {
                     int newEnemyLane = i;
                     Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
