@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Hexagon : MonoBehaviour
 {
-    [SerializeField] private bool hasShield;
+    private bool hasShield;
     
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
@@ -26,5 +26,14 @@ public class Hexagon : MonoBehaviour
             }
 
         }
+    }
+
+    /// <summary>
+    /// Activates shield
+    /// </summary>
+    public void ActivateShield()
+    {
+        hasShield = true;
+        //TODO enable shield object
     }
 }
