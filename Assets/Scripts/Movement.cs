@@ -18,6 +18,22 @@ public class Movement : MonoBehaviour
     private bool rotating = false;
     private bool canRotate = true;
 
+    private int lane = 0;
+
+    public int Lane
+    {
+        get { return lane; }
+        private set
+        {
+            if (value == 6)
+                lane = 0;
+            else if (value == -1)
+                lane = 5;
+            else
+                lane = value;
+        }
+    }
+
     /// <summary>
     /// Sets new angle to the current angle
     /// </summary>
@@ -38,6 +54,11 @@ public class Movement : MonoBehaviour
         
         // Calculates the new angle, keeping it at values multiples of 60, and less than 360
         newAngle = (newAngle + angle) % 360f;
+
+        if (angle < 0)
+            Lane--;
+        else
+            Lane++;
 
         rotating = true;
     }
@@ -72,7 +93,7 @@ public class Movement : MonoBehaviour
                 clickRelease = Input.mousePosition;
 
                 float swipeDistance = (clickRelease.x - clickPress.x) * 50;
-                Debug.Log(swipeDistance);
+                // Debug.Log(swipeDistance);
 
                 if (swipeDistance < -minSwipeDistance)
                     Rotate(-rotationAngle);
