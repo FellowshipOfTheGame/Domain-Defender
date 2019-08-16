@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
                 else
                     ScoreBoard.instance.OnEnemyDeath();
 
-                Destroy(this.gameObject);
+                Die();
             }
         }
     }
@@ -137,6 +137,25 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Destroys itself with a chance of dropping a power up. If the power up is not dropped,
+    /// there is still a chance to drop a coin.
+    /// </summary>
+    private void Die()
+    {
+        bool powerUpDrop = Random.Range(0f, 1f) < Spawner.instance.powerUpDropProbability;
+        if (powerUpDrop)
+            Spawner.instance.DropPowerUp(this.transform.position, this.transform.rotation);
+        else
+        {
+            bool coinDrop = Random.Range(0f, 1f) < Spawner.instance.coinDropProbability;
+            if (coinDrop)
+                Spawner.instance.DropCoin(this.transform.position, this.transform.rotation);
+        }           
+
+        Destroy(this.gameObject);
     }
 
     /// <summary>
