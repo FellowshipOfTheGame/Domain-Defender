@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour 
 {
-    [Tooltip("Projectile prefab")]
-    [SerializeField] private GameObject projectile;
     [Tooltip("Projectile speed")]
     [SerializeField] private float speed;
-    [Tooltip("Wait time between shots")]
-    [SerializeField] private float cooldown;
     [Tooltip("Distance between shot spawn and the center of the player")]
     [SerializeField] private float offsetDistance;
+    
+    [Space(5)]
+    [Header("These variabes are initialized by PowerUps")]
+    [Tooltip("Projectile prefab")]
+    public GameObject projectile;
+    [Tooltip("Wait time between shots")]
+    public float cooldown;
+
     private bool canAttack = true;
+
 
     /// <summary>
     /// Checks if the attack button is pressed and attacks if it can attack
@@ -45,4 +50,6 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSecondsRealtime(cooldown);
         canAttack = true;
     }
+
+
 }

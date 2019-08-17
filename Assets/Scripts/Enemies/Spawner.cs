@@ -13,10 +13,15 @@ public class Spawner : MonoBehaviour
     private Vector3 center = new Vector3(0f, 0f, 0f);
     private float timeBetweenSpawns = 3f;
 
+    public float coinDropProbability;
+    public float powerUpDropProbability;
+    [SerializeField] GameObject coinPrefab;
+    [SerializeField] GameObject[] powerUpsPrefabs;
+
     public Vector3[] Spawns => spawns;
 
     /// <summary>
-    /// Checks singleton conditions and sets all the six spawns and starts spawners
+    /// Checks singleton conditions, sets all the six spawns, and then starts the spawner
     /// </summary>
     private void Start()
     {
@@ -51,5 +56,26 @@ public class Spawner : MonoBehaviour
             enemy.GetComponent<Enemy>().Lane = spawnIndex;
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
+    }
+
+    /// <summary>
+    /// Drops a coin with position and rotation of the destroyed enemy
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    public void DropCoin(Vector3 position, Quaternion rotation)
+    {
+        Instantiate(coinPrefab, position, rotation);
+    }
+
+    /// <summary>
+    /// Drops a power up with position and rotation of the destroyed enemy
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    public void DropPowerUp(Vector3 position, Quaternion rotation)
+    {
+        int powerUpIndex = Random.Range(0, powerUpsPrefabs.Length - 1);
+        Instantiate(powerUpsPrefabs[powerUpIndex], position, rotation);
     }
 }

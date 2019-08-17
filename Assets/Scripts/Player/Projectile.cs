@@ -6,6 +6,10 @@ public class Projectile : MonoBehaviour
 {
     [Tooltip("Damage caused in enemies by the projectile")]
     [SerializeField] private int damage;
+    [Tooltip("Number of hits on enemies before exploding")]
+    [SerializeField] private int maxHits;
+    private int hits = 0;
+
 
     /// <summary>
     /// Destroys the projectile if it gets out of the game area
@@ -26,7 +30,9 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().Life -= damage;
-            Destroy(this.gameObject);
+
+            if (++hits == maxHits)
+                Destroy(this.gameObject);
         }
     }
 }
