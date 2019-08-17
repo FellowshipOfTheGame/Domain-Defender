@@ -6,6 +6,10 @@ TextureImporter:
     21300002: ship-test_1
     21300004: ship-test_2
     21300006: ship-test_3
+    21300008: ship-debian_0
+    21300010: ship-debian_1
+    21300012: ship-debian_2
+    21300014: ship-debian_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,81 +92,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ship-test_0
+      name: ship-debian_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 133
-        width: 708
-        height: 714
+        y: 143
+        width: 710
+        height: 697
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62506dc451da83d4f833ceea9918fac0
+      spriteID: c519a1ed6bb2cb44e8895349dbd63a0e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ship-test_1
+      name: ship-debian_1
       rect:
         serializedVersion: 2
-        x: 884
-        y: 133
-        width: 704
-        height: 707
+        x: 883
+        y: 143
+        width: 710
+        height: 697
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94b008944d222b041a13c8b0f67b95eb
+      spriteID: 8d8f97b261d64084ca3a4dda5651f50c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ship-test_2
+      name: ship-debian_2
       rect:
         serializedVersion: 2
-        x: 1765
-        y: 319
-        width: 344
-        height: 395
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dea81354531c2c14db34070d8dfac060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ship-test_3
-      rect:
-        serializedVersion: 2
-        x: 1657
-        y: 1
+        x: 1656
+        y: 0
         width: 230
-        height: 264
+        height: 265
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 836268a447f6d3b4591343dc5493a69a
+      spriteID: 33d4e6b4848c9554baa2a8bbca2f4a45
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ship-debian_3
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 318
+        width: 344
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3c6cf61ee3e5e47947a2eb61c3f3cf
       vertices: []
       indices: 
       edges: []
