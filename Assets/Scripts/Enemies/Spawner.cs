@@ -75,7 +75,7 @@ public class Spawner : MonoBehaviour
     /// <param name="rotation"></param>
     public void DropPowerUp(Vector3 position, Quaternion rotation)
     {
-        int powerUpIndex = Random.Range(0, powerUpsPrefabs.Length - 1);
+        int powerUpIndex = Random.Range(0, powerUpsPrefabs.Length);
         Instantiate(powerUpsPrefabs[powerUpIndex], position, rotation);
     }
 }

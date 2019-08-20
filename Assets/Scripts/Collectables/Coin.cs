@@ -10,6 +10,7 @@ public class Coin : Collectable
     /// <param name="other"></param>
     protected override void Effect(Collider2D other)
     {
-        //TODO GameManager.instance.coins++;
+        ScoreBoard.instance.Coins++;
+        Destroy(this.gameObject);
     }
 }

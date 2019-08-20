@@ -11,5 +11,6 @@ public class DrillPowerUp : Collectable
     protected override void Effect(Collider2D player)
     {
         player.GetComponent<PowerUps>().DrillPowerUp();
+        Destroy(this.gameObject);
     }
 }

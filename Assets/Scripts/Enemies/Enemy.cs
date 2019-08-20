@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
             if ((this.transform.position - startPosition).magnitude < 0.1f)
             {
                 movingToLane = false;
-                // col.enabled = true;
+                col.enabled = true;
             }
 
         }
@@ -90,8 +90,8 @@ public class Enemy : MonoBehaviour
 
     public void MoveToLane(int lane, Vector3 position)
     {
-        // col = GetComponent<Collider2D>();
-        // col.enabled = false;
+        col = GetComponent<Collider2D>();
+        col.enabled = false;
         
         Lane = lane;
         startPosition = position;

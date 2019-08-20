@@ -10,9 +10,21 @@ public class ScoreBoard : MonoBehaviour
 	public static ScoreBoard instance;
 	[Tooltip("Text displayed on screen")]
 	[SerializeField] private TextMeshProUGUI scoreText;
+	[SerializeField] private TextMeshProUGUI coinsText;
 	private int score = 0;
+	private int coins = 0;
 	
 	public int Score { get { return score; } }
+
+	public int Coins 
+	{
+		get { return coins; }
+		set
+		{
+			coins = value;
+			coinsText.text = "Coins: " + coins.ToString();
+		}
+	}
 
 	/// <summary>
 	/// Checks singleton condition and initializes the score displayed on screen
@@ -26,6 +38,7 @@ public class ScoreBoard : MonoBehaviour
 			Destroy(this.gameObject);
 
 		scoreText.text = "Score: " + score.ToString();
+		coinsText.text = "Coins: " + coins.ToString();
 	}
 
 	/// <summary>

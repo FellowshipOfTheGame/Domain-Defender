@@ -74,7 +74,7 @@ public class PowerUps : MonoBehaviour
     /// </summary>
     private void ResetCadence()
     {
-        playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
+        playerShoot.cooldown = baseCadence;
     }
 
 }
