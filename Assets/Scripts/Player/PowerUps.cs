@@ -16,6 +16,8 @@ public class PowerUps : MonoBehaviour
     [SerializeField] float cadenceMultiplier;
     [SerializeField] float cadencePowerUpDuration;
 
+    public int bullet;
+
 
     private enum Projectiles { normal = 0, drill = 1 };
 
@@ -30,6 +32,9 @@ public class PowerUps : MonoBehaviour
 
         ResetProjectile();
         ResetCadence();
+
+        if(bullet == 1) CadencePowerUp();
+        if(bullet == 2) DrillPowerUp();
     }
 
 
@@ -66,6 +71,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetCadence");
         playerShoot.cooldown /= cadenceMultiplier;
+        playerShoot.type = 1;
         Invoke("ResetCadence", cadencePowerUpDuration);
     }
 
@@ -74,7 +80,8 @@ public class PowerUps : MonoBehaviour
     /// </summary>
     private void ResetCadence()
     {
-        playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
+        playerShoot.cooldown = baseCadence;
+        playerShoot.type = 0;
     }
 
 }

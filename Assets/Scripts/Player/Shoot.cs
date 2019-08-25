@@ -16,6 +16,7 @@ public class Shoot : MonoBehaviour
     [Tooltip("Wait time between shots")]
     public float cooldown;
 
+    public int type;
     private bool canAttack = true;
 
 
@@ -45,6 +46,7 @@ public class Shoot : MonoBehaviour
         // Instantiates the projectile and sets its velocity
         GameObject instance = Instantiate(projectile, spawnPosition, this.transform.rotation);
         instance.GetComponent<Rigidbody2D>().velocity = direction * speed;
+        instance.transform.GetComponent<BulletAnimHandle>().Initialize(type);
 
         // Waits "cooldown" seconds to enable player to shoot again 
         yield return new WaitForSecondsRealtime(cooldown);

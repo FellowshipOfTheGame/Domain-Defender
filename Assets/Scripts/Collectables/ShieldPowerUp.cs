@@ -11,5 +11,6 @@ public class ShieldPowerUp : Collectable
     protected override void Effect(Collider2D player)
     {
         player.GetComponent<PowerUps>().ShieldPowerUp();
+        Destroy(this.gameObject);
     }
 }

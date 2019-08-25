@@ -11,5 +11,6 @@ public class CadencePowerUp : Collectable
     protected override void Effect(Collider2D player)
     {
         player.GetComponent<PowerUps>().CadencePowerUp();
+        Destroy(this.gameObject);
     }
 }
