@@ -37,7 +37,7 @@ public class AnimTest : MonoBehaviour {
 			if ((this.transform.position - pos[destiny]).magnitude <= 0.2f){
 				this.transform.position=pos[destiny];
 				canMove=false;
-				handle.Stop();
+				//handle.Stop();
 			}
 		}
 	}

@@ -24,7 +24,7 @@ public class Hexagon : MonoBehaviour
             else
             {
                 //SceneManager.LoadScene(0);
-                player.playerAnim.GameOver();
+                AnimManager.instance.GameOver();
                 Invoke("Reset", 1.3f);
             }
 
