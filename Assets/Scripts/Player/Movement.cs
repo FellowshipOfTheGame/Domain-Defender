@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     private Vector3 clickPress, clickRelease;
     private bool rotating = false;
     private bool canRotate = true;
+    public PlayerAnimHandle playerAnim;
 
     private int lane = 0;
 
@@ -55,10 +56,13 @@ public class Movement : MonoBehaviour
         // Calculates the new angle, keeping it at values multiples of 60, and less than 360
         newAngle = (newAngle + angle) % 360f;
 
-        if (angle < 0)
+        if (angle < 0){
             Lane--;
-        else
+            playerAnim.MoveRight();
+        }else{
             Lane++;
+            playerAnim.MoveLeft();
+        }
 
         rotating = true;
     }
@@ -126,8 +130,10 @@ public class Movement : MonoBehaviour
                 canRotate = true;
 
             // Checks if the angle is close enough. If so, stops the rotation
-            if (remainingAngle < 0.01f)
+            if (remainingAngle < 0.01f){
                 rotating = false;
+                playerAnim.Stop();
+            }
         }
     }
 }

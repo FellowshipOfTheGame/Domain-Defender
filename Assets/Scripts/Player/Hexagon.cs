@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Hexagon : MonoBehaviour
 {
     private bool hasShield;
+    public Movement player;
     
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
@@ -22,7 +23,9 @@ public class Hexagon : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                //SceneManager.LoadScene(0);
+                player.playerAnim.GameOver();
+                Invoke("Reset", 1.3f);
             }
 
         }
@@ -35,5 +38,9 @@ public class Hexagon : MonoBehaviour
     {
         hasShield = true;
         //TODO enable shield object
+    }
+
+    void Reset(){
+        SceneManager.LoadScene(0);
     }
 }
