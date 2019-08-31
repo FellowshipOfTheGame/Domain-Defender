@@ -94,8 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 100
-  speed: 0.01
-  repositioningSpeed: 0.1
+  speed: 0.5
+  repositioningSpeed: 30
+  repositioningRadiusSpeed: 2.5
   lane: 0
   split: 0
   splitResultEnemy: {fileID: 0}
