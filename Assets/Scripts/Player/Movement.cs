@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
     private bool rotating = false;
     private bool canRotate = true;
 
+    private bool preparing = false;
+
     private int lane = 0;
 
     public int Lane
@@ -55,12 +57,23 @@ public class Movement : MonoBehaviour
         // Calculates the new angle, keeping it at values multiples of 60, and less than 360
         newAngle = (newAngle + angle) % 360f;
 
-        if (angle < 0)
+        if (angle < 0){
             Lane--;
-        else
+            AnimManager.instance.MoveRight();
+        }else{
             Lane++;
+            AnimManager.instance.MoveLeft();
+        }
 
         rotating = true;
+        
+        CancelInvoke();
+        preparing = true;
+        Invoke("EnableRotate", 0.2f);
+    }
+
+    void EnableRotate(){
+        preparing = false;
     }
 
     /// <summary>
@@ -108,7 +121,7 @@ public class Movement : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if (rotating)
+        if (rotating && !preparing)
         {
             // Calculates the next angle using lerp
             float angle = Mathf.LerpAngle(this.transform.eulerAngles.z, newAngle, speed);
@@ -126,8 +139,14 @@ public class Movement : MonoBehaviour
                 canRotate = true;
 
             // Checks if the angle is close enough. If so, stops the rotation
-            if (remainingAngle < 0.01f)
+            if (remainingAngle < inputToleranceAngle + 5.0f){
+                AnimManager.instance.Stop();
+            }
+
+            // Checks if the angle is close enough. If so, stops the rotation
+            if (remainingAngle < 0.01f){
                 rotating = false;
+            }
         }
     }
 }

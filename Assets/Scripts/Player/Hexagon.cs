@@ -23,7 +23,9 @@ public class Hexagon : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                //SceneManager.LoadScene(0);
+                AnimManager.instance.GameOver();
+                Invoke("Reset", 1.3f);
             }
 
         }
