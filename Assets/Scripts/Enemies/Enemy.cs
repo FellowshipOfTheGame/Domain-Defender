@@ -161,14 +161,14 @@ public class Enemy : MonoBehaviour
             int newEnemyLane = Mod(lane + 1, 6);
             Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-            GameObject instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+            GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
 
             // Instantiates one enemy right
             newEnemyLane = Mod(lane - 1, 6);
             newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-            instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+            instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
         }
         else
@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour
                     int newEnemyLane = i;
                     Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
                     newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-                    GameObject instance = Instantiate(splitResultEnemy, this.transform.position, Quaternion.identity);
+                    GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
                     instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
                 }
             }

@@ -47,6 +47,10 @@ public class Hexagon : MonoBehaviour
     {
         hasShield = false;
         shield.SetActive(false);
+    }
 
+    private void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

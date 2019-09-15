@@ -52,7 +52,10 @@ public class Spawner : MonoBehaviour
         {
             int spawnIndex = Random.Range(0, 6);
             int enemyIndex = Random.Range(0, enemyPrefabs.Length);
+            // Vector2 direction = (Vector2)(spawns[spawnIndex]).normalized;
+            // Quaternion rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, direction));
             GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawns[spawnIndex], Quaternion.identity);
+            enemy.transform.up = spawns[spawnIndex];
             enemy.GetComponent<Enemy>().Lane = spawnIndex;
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
