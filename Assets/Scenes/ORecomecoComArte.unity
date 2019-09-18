@@ -389,6 +389,10 @@ MonoBehaviour:
   - {fileID: 5606214294604898822, guid: 9d2b22dae2166924d84a6e296f4e6c71, type: 3}
   - {fileID: 7186544672237272289, guid: b5d8db340c3df5a428e7bda525c38038, type: 3}
   - {fileID: 4002621636050489418, guid: aa212534160e00a419794a960a618e3d, type: 3}
+  timeBetweenSpawns: 5
+  waveSize: 1
+  waveIncreasePercentage: 0.1
+  timeBetweenSpawnsDecreasePercentage: 0.05
   coinDropProbability: 0.3
   powerUpDropProbability: 0.15
   coinPrefab: {fileID: 5063078456923338586, guid: b5ea8f78975b53b41b1a70eff492203e,
@@ -1680,7 +1684,7 @@ MonoBehaviour:
   cadenceMultiplier: 3
   cadencePowerUpDuration: 5
   drillPowerUpDuration: 5
-  numberOfBullets: 3
+  numberOfBullets: 1
 --- !u!114 &7414091922838344727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,7 +1703,7 @@ MonoBehaviour:
   projectile: {fileID: 4927902641577794764, guid: 61da53f983944bb4b98a7f1e6355a462,
     type: 3}
   cooldown: 0.3
-  numberOfBullets: 4
+  numberOfBullets: 1
   type: 1
 --- !u!50 &7414091922838344728
 Rigidbody2D:

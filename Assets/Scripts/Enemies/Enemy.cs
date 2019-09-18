@@ -49,11 +49,11 @@ public class Enemy : MonoBehaviour
             if (life <= 0)
             {
                 if (split)
-                    Split();
+                    StartCoroutine(Split());
                 else
-                    ScoreBoard.instance.OnEnemyDeath();
+                    Die();
 
-                Die();
+                ScoreBoard.instance.OnEnemyDeath();
             }
         }
     }
@@ -150,42 +150,47 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Splits in two other enemies, that will spawn in the adjacent routes, a litte further from the center than this enemy is
     /// </summary>
-    private void Split()
+    private IEnumerator Split()
     {
         // Calculates the distance from the center
         float distanceFromCenter = (this.transform.position - center).magnitude;
 
-        if (!trojanHorse)
+        // Instantiates a enemy left
+        int newEnemyLane = Mod(lane + 1, 6);
+        Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+        GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
+        instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+
+        // Instantiates a enemy right
+        newEnemyLane = Mod(lane - 1, 6);
+        newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+        newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
+        instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
+        instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+
+        if (trojanHorse)
         {
-            // Instantiates one enemy left
-            int newEnemyLane = Mod(lane + 1, 6);
-            Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
+            yield return new WaitForSeconds(0.1f);
+
+            // Instantiates a enemy two lanes left
+            newEnemyLane = Mod(lane + 2, 6);
+            newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-            GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
+            instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
 
-            // Instantiates one enemy right
-            newEnemyLane = Mod(lane - 1, 6);
+            // Instantiates a enemy two lanes right
+            newEnemyLane = Mod(lane - 2, 6);
             newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
         }
-        else
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                if (i != lane && i != (lane+3)%6)
-                {
-                    int newEnemyLane = i;
-                    Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
-                    newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
-                    GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
-                    instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-                }
-            }
-        }
+
+        Die();
     }
+    
 
     /// <summary>
     /// Destroys itself with a chance of dropping a power up. If the power up is not dropped,
