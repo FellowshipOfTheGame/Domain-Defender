@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: "Assets/Scenes/ORecome\xE7o.unity"
     guid: 802dc3ed4acb0ae479e4d58c3d5dbe95
   - enabled: 1
