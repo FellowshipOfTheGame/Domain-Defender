@@ -29,10 +29,14 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            if (++hits == maxHits)
+                this.GetComponent<Collider2D>().enabled = false;
+
             other.GetComponent<Enemy>().Life -= damage;
 
-            if (++hits == maxHits)
+            if (hits == maxHits)
                 Destroy(this.gameObject);
+
         }
     }
 }
