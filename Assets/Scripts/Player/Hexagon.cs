@@ -37,7 +37,7 @@ public class Hexagon : MonoBehaviour
     public void ActivateShield()
     {
         hasShield = true;
-        shield.SetActive(true);
+        AnimManager.instance.hexagon.SetShield(true);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class Hexagon : MonoBehaviour
     private void DeactivateShield()
     {
         hasShield = false;
-        shield.SetActive(false);
+        AnimManager.instance.hexagon.SetShield(false);
     }
 
     private void Reset()

@@ -68,6 +68,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetCadence");
         playerShoot.cooldown = baseCadence / cadenceMultiplier;
+        playerShoot.type = 1;
         Invoke("ResetCadence", cadencePowerUpDuration);
     }
 
