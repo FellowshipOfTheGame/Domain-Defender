@@ -8,6 +8,7 @@ public class AnimManager : MonoBehaviour {
 	public Sprite[] shipSprites;
 	public Animator playerAnim;
 	public SpriteRenderer playerArt, playerArtMask;
+	public HexagonAnimHandle hexagon;
 	
 	public void SetShip(int i){ //0=debian; 1=arch; 2=ubuntu; 3=fedora
 		playerArt.sprite = shipSprites[2*i];
@@ -32,6 +33,7 @@ public class AnimManager : MonoBehaviour {
 
 	public void GameOver(){ //active all the game over animation
 		playerAnim.SetTrigger("die");
+		hexagon.GameOver();
 	}
 
 	void Awake(){
