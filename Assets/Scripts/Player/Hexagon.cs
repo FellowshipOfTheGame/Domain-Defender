@@ -51,6 +51,19 @@ public class Hexagon : MonoBehaviour
 
     private void Reset()
     {
+        Time.timeScale = 0f;
+        int score = ScoreBoard.instance.Score;
+        int coins = ScoreBoard.instance.Coins;
+        //Player form = new WWWForm("player");
+    }
+
+    private void SecurityCheck()
+    {
+
+    }
+
+    private void GoToUpgradesScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
