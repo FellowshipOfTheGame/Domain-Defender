@@ -20,7 +20,7 @@ public class BulletAnimHandle : MonoBehaviour {
 			if(type == 0){
 				bullets[0].SetActive(true);
 			}else{
-				bullets[1+doubleCadencePos].SetActive(true);
+				bullets[doubleCadencePos].SetActive(true);
 				doubleCadencePos=1-doubleCadencePos;
 			}
 		}
