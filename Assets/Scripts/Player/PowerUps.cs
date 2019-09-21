@@ -16,6 +16,7 @@ public class PowerUps : MonoBehaviour
     [SerializeField] float cadencePowerUpDuration;
     [SerializeField] float drillPowerUpDuration;    
     [SerializeField] int numberOfBullets;
+    PlayerStats playerStats;
 
 
     private enum Projectiles { normal = 0, drill = 1 };
@@ -29,9 +30,41 @@ public class PowerUps : MonoBehaviour
         if (playerShoot == null)
             playerShoot = GetComponent<Shoot>();
 
+
+        Login();
+
+    }
+
+    private void Login()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("email", "asd");
+        StartCoroutine(NetworkManager.PostRequest("/login", form, LoginCallback));
+    }
+
+    private void LoginCallback(string token)
+    {
+        NetworkManager.token = token;
+
+        GetData();
+    }
+
+
+    private void GetData()
+    {
+        Time.timeScale = 0;
+
+        StartCoroutine(NetworkManager.GetRequest("/player", GetDataCallback));
+        
+    }
+
+    private void GetDataCallback(PlayerStats playerStats)
+    {
+        this.playerStats = playerStats;
         ResetProjectile();
         ResetCadence();
         playerShoot.numberOfBullets = numberOfBullets;
+        Time.timeScale = 1;
     }
 
 

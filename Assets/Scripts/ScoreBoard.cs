@@ -24,8 +24,8 @@ public class ScoreBoard : MonoBehaviour
 	{ 
 		get 
 		{
-			Debug.Log("Score1: " + scoreUi);
-			Debug.Log("Score2: " + (score/highScore + 17) * scoreTextMeshPro);
+			// Debug.Log("Score1: " + scoreUi);
+			// Debug.Log("Score2: " + (score/highScore + 17) * scoreTextMeshPro);
 			if (scoreUi != (score/highScore + 17) * scoreTextMeshPro)
 			{
 				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
@@ -49,8 +49,8 @@ public class ScoreBoard : MonoBehaviour
 	{
 		get 
 		{ 
-			Debug.Log("Coins1: " + coinsUi);
-			Debug.Log("Coins2: " + (coins/maxCoins + 17) * coinsTextMeshPro);
+			// Debug.Log("Coins1: " + coinsUi);
+			// Debug.Log("Coins2: " + (coins/maxCoins + 17) * coinsTextMeshPro);
 			if (coinsUi != (coins/maxCoins + 17) * coinsTextMeshPro)
 			{
 				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");

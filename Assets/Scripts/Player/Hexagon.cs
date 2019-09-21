@@ -54,16 +54,20 @@ public class Hexagon : MonoBehaviour
         Time.timeScale = 0f;
         int score = ScoreBoard.instance.Score;
         int coins = ScoreBoard.instance.Coins;
-        //Player form = new WWWForm("player");
+
+        // If everything is ok
+        if (score != -1  && coins != -1)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("score", score.ToString());
+            form.AddField("money", coins.ToString());
+            StartCoroutine(NetworkManager.PostRequest("/player", form, GoToUpgradesScene));
+        }
     }
 
-    private void SecurityCheck()
+    private void GoToUpgradesScene(string _)
     {
-
-    }
-
-    private void GoToUpgradesScene()
-    {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
