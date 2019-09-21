@@ -18,7 +18,9 @@ public class NetworkManager : MonoBehaviour
     public static string baseUrl = "localhost:3000";
     public static string token = null;
 
-    public static IEnumerator GetRequest(string uri)
+    public delegate void OnPlayerStatsAnswer(PlayerStats stats);
+
+    public static IEnumerator GetRequest(string uri, OnPlayerStatsAnswer callback)
     {
         UnityWebRequest uwr = UnityWebRequest.Get(baseUrl + uri);
 
@@ -34,12 +36,13 @@ public class NetworkManager : MonoBehaviour
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
+            callback(JsonUtility.FromJson<PlayerStats>(uwr.downloadHandler.text));
         }
     }
 
-    public delegate void OnReceived(string data);
+    public delegate void OnStringAnswer(string data);
 
-    public static IEnumerator PostRequest(string url, WWWForm form, OnReceived callback)
+    public static IEnumerator PostRequest(string url, WWWForm form, OnStringAnswer callback)
     {
         // WWWForm form = new WWWForm();
         // form.AddField("myField", "myData");
@@ -59,16 +62,8 @@ public class NetworkManager : MonoBehaviour
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-            // if(url == "/login")
-            //     token = uwr.downloadHandler.text;
 
             callback(uwr.downloadHandler.text);
         }
     }
-
-    // public void AddCoins();
-    // public void Upgrade();
-    // public void SubmitScore();
-    // public void GetPlayerInfo();
-    // void SubmitUpgradePrices();
 }
