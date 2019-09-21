@@ -14,15 +14,13 @@ public class BulletAnimHandle : MonoBehaviour {
 
 	public void Initialize(int type){
 		foreach (GameObject gb in bullets)
-			gb.SetActive(false);
+		gb.SetActive(false);
 
-		if (bullets.Length > 0){
-			if(type == 0){
+		if(type != 1){
 				bullets[0].SetActive(true);
-			}else{
-				bullets[doubleCadencePos].SetActive(true);
-				doubleCadencePos=1-doubleCadencePos;
-			}
+		}else if (bullets.Length >= 3){
+			bullets[1+doubleCadencePos].SetActive(true);
+			doubleCadencePos=1-doubleCadencePos;
 		}
 	}
 	
