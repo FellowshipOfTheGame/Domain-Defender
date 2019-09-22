@@ -18,9 +18,10 @@ public class NetworkManager : MonoBehaviour
     public static string baseUrl = "localhost:3000";
     public static string token = null;
 
-    public delegate void OnPlayerStatsAnswer(PlayerStats stats);
+    public delegate void OnStringAnswer(string data);
+    public delegate void OnObjectReturn<T>(T stats);
 
-    public static IEnumerator GetRequest(string uri, OnPlayerStatsAnswer callback)
+    public static IEnumerator GetRequest<T>(string uri, OnObjectReturn<T> callback)
     {
         UnityWebRequest uwr = UnityWebRequest.Get(baseUrl + uri);
 
@@ -36,11 +37,9 @@ public class NetworkManager : MonoBehaviour
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-            callback(JsonUtility.FromJson<PlayerStats>(uwr.downloadHandler.text));
+            callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
         }
     }
-
-    public delegate void OnStringAnswer(string data);
 
     public static IEnumerator PostRequest(string url, WWWForm form, OnStringAnswer callback)
     {
@@ -62,7 +61,6 @@ public class NetworkManager : MonoBehaviour
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-
             callback(uwr.downloadHandler.text);
         }
     }

@@ -24,7 +24,6 @@ public class StatUpgradeMenu : MonoBehaviour
         public TextMeshProUGUI currentLevel;
         public TextMeshProUGUI nextLevel;
         public TextMeshProUGUI currentValue;
-        public Slider sublevelSlider;
         public Button upgradeButton;
     }
 
@@ -33,48 +32,39 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] GameObject selectionIcon;
     [SerializeField] PlayerStats playerStats;
     [SerializeField] GameObject defaultSelected;
-    PlayerStats.Stat selectedStat;
+    Upgrade selectedStat;
 
     private void Start()
     {
-        playerStats.Coins = 4000;
-        uiReferences.coins.text = playerStats.Coins.ToString();
         Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected);   
     }
 
     public void Select(PlayerStats.StatType selectedStatType, GameObject selectedObject)
     {
         selectionIcon.transform.position = selectedObject.transform.position;
-        selectedStat = playerStats[selectedStatType];
+        // selectedStat = playerStats.upgradeLevel[(int)selectedStatType];
         
         UpdateUI();
     }
 
     public void Upgrade()
     {
-        playerStats.Coins -= selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel];
-        uiReferences.coins.text = playerStats.Coins.ToString();
+        // playerStats.Coins -= selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel];
+        // uiReferences.coins.text = playerStats.Coins.ToString();
 
-        selectedStat.sublevel++;
-        if(selectedStat.sublevel == selectedStat.numOfSubLevels)
-        {
-            selectedStat.sublevel = 0;
-            selectedStat.level++;
-        }
-
-        UpdateUI();
+        // UpdateUI();
     }
 
     private void UpdateUI()
     {
-        selectedStat.currentValue = selectedStat.values[selectedStat.level];
-        uiReferences.currentLevel.text = selectedStat.level.ToString();
-        uiReferences.nextLevel.text = (selectedStat.level + 1).ToString();
-        uiReferences.cost.text = selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel].ToString();
-        uiReferences.currentValue.text = selectedStat.currentValue.ToString();
-        uiReferences.sublevelSlider.value = uiReferences.sublevelSlider.maxValue / selectedStat.numOfSubLevels * selectedStat.sublevel;
+        // selectedStat.currentValue = selectedStat.values[selectedStat.level];
+        // uiReferences.currentLevel.text = selectedStat.level.ToString();
+        // uiReferences.nextLevel.text = (selectedStat.level + 1).ToString();
+        // uiReferences.cost.text = selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel].ToString();
+        // uiReferences.currentValue.text = selectedStat.currentValue.ToString();
+        // uiReferences.sublevelSlider.value = uiReferences.sublevelSlider.maxValue / selectedStat.numOfSubLevels * selectedStat.sublevel;
 
-        if(playerStats.Coins < selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel])
-            uiReferences.upgradeButton.enabled = false;
+        // if(playerStats.Coins < selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel])
+        //     uiReferences.upgradeButton.enabled = false;
     }
 }
