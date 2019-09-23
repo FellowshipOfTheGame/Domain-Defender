@@ -31,30 +31,31 @@ public class PowerUps : MonoBehaviour
             playerShoot = GetComponent<Shoot>();
 
 
-        Login();
-
-    }
-
-    private void Login()
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("email", "asd");
-        StartCoroutine(NetworkManager.PostRequest("/login", form, LoginCallback));
-    }
-
-    private void LoginCallback(string token)
-    {
-        NetworkManager.token = token;
-
+        // Login();
         GetData();
+
     }
+
+    // private void Login()
+    // {
+    //     WWWForm form = new WWWForm();
+    //     form.AddField("email", "asd");
+    //     StartCoroutine(NetworkManager.PostRequest<Token>("/login", form, LoginCallback));
+    // }
+
+    // private void LoginCallback(Token token)
+    // {
+    //     NetworkManager.token = token.token;
+
+    //     GetData();
+    // }
 
 
     private void GetData()
     {
         Time.timeScale = 0;
 
-        StartCoroutine(NetworkManager.GetRequest("/player", GetDataCallback));
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback));
         
     }
 

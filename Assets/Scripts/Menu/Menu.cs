@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
@@ -38,5 +39,11 @@ public class Menu : MonoBehaviour {
 		loginTab.SetActive(false);
 		logoutButton.SetActive(true);
 		login = true;
+	}
+
+
+	public void PlayGame()
+	{
+		SceneManager.LoadScene("ORecomecoComArte");
 	}
 }

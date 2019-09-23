@@ -61,13 +61,13 @@ public class Hexagon : MonoBehaviour
             WWWForm form = new WWWForm();
             form.AddField("score", score.ToString());
             form.AddField("money", coins.ToString());
-            StartCoroutine(NetworkManager.PostRequest("/player", form, GoToUpgradesScene));
+            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene));
         }
     }
 
-    private void GoToUpgradesScene(string _)
+    private void GoToUpgradesScene(PlayerStats player)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Menu");
     }
 }
