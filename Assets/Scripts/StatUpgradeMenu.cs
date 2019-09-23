@@ -107,6 +107,7 @@ public class StatUpgradeMenu : MonoBehaviour
             uiReferences.cost.text = selectedStat.cost[level].ToString();
             uiReferences.currentValue.text = selectedStat.value[level].ToString();
             uiReferences.nextValue.text = selectedStat.value[level+1].ToString();
+            uiReferences.coins.text = playerStats.money.ToString();
 
             if(playerStats.money < selectedStat.cost[level])
                 uiReferences.upgradeButton.enabled = false;
