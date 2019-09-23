@@ -41,7 +41,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator PostRequest(string url, WWWForm form, OnStringAnswer callback)
+    public static IEnumerator PostRequest<T>(string url, WWWForm form, OnObjectReturn<T> callback)
     {
         // WWWForm form = new WWWForm();
         // form.AddField("myField", "myData");
@@ -61,7 +61,7 @@ public class NetworkManager : MonoBehaviour
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-            callback(uwr.downloadHandler.text);
+            callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
         }
     }
 }
