@@ -20,6 +20,7 @@ public class NetworkManager : MonoBehaviour
 
     public delegate void OnStringAnswer(string data);
     public delegate void OnObjectReturn<T>(T stats);
+    public delegate void OnObjectReturnWithError<T>(T stats, string error);
 
     public static IEnumerator GetRequest<T>(string uri, OnObjectReturn<T> callback)
     {
@@ -64,4 +65,35 @@ public class NetworkManager : MonoBehaviour
             callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
         }
     }
+
+    public static IEnumerator AttemptLogin(bool signup, string username, string password, OnObjectReturnWithError<Token> callback)
+    {
+        string uri = signup ? "/register" : "/login";
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+        form.AddField("password", password);
+
+        UnityWebRequest uwr = UnityWebRequest.Post(baseUrl + uri, form);
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error While Sending: " + uwr.error);
+            callback(null, "Erro de conexão.");
+        }
+        else
+        {
+            Debug.Log("Received: " + uwr.downloadHandler.text);
+            if(uwr.responseCode == 200)
+                callback(JsonUtility.FromJson<Token>(uwr.downloadHandler.text), null);
+            else
+                callback(null, JsonUtility.FromJson<Message>(uwr.downloadHandler.text).errorMessage);
+        }
+    }
+}
+
+public class Message
+{
+    public string errorMessage;
 }

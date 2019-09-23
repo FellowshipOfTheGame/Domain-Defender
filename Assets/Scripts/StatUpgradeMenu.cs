@@ -33,7 +33,7 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] GameObject selectionIcon;
     [SerializeField] PlayerStats playerStats;
     [SerializeField] GameObject defaultSelected;
-    Upgrade[] upgradeableStats;
+    public static Upgrade[] upgradeableStats;
     StatType selectedStatType;
 
     private void Start()
@@ -101,7 +101,6 @@ public class StatUpgradeMenu : MonoBehaviour
         if(upgradeableStats != null && playerStats != null)
         {
             Upgrade selectedStat = upgradeableStats[(int)selectedStatType];
-            Debug.Log((int)selectedStatType);
             int level = playerStats[selectedStatType];
 
             uiReferences.cost.text = selectedStat.cost[level].ToString();
