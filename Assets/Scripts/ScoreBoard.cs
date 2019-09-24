@@ -12,60 +12,16 @@ public class ScoreBoard : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI scoreText;
 	[SerializeField] private TextMeshProUGUI coinsText;
 	private int score = 0;
-	public int coins = 0;
-	private int scoreUi;
-	private int coinsUi;
-	private int scoreTextMeshPro;
-	private int coinsTextMeshPro;
-	private int highScore;
-	private int maxCoins;
-
-	public int Score 
-	{ 
-		get 
-		{
-			// Debug.Log("Score1: " + scoreUi);
-			// Debug.Log("Score2: " + (score/highScore + 17) * scoreTextMeshPro);
-			if (scoreUi != (score/highScore + 17) * scoreTextMeshPro)
-			{
-				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
-				return -1;
-			}
-			else
-				return score; 
-		} 
-		private set 
-		{
-			score = value;
-			scoreTextMeshPro = (score % 3) + 1;
-			highScore = Random.Range(1, 14);
-			scoreUi = (score/highScore + 17) * scoreTextMeshPro;
-
-			scoreText.text = "Score: " + score.ToString();
-		}
-	}
+	private int coins = 0;
+	
+	public int Score { get { return score; } }
 
 	public int Coins 
 	{
-		get 
-		{ 
-			// Debug.Log("Coins1: " + coinsUi);
-			// Debug.Log("Coins2: " + (coins/maxCoins + 17) * coinsTextMeshPro);
-			if (coinsUi != (coins/maxCoins + 17) * coinsTextMeshPro)
-			{
-				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
-				return -1;
-			}
-			else
-				return coins; 
-		}
+		get { return coins; }
 		set
 		{
 			coins = value;
-			coinsTextMeshPro = (coins % 3) + 1;
-			maxCoins = Random.Range(1, 14);
-			coinsUi = (coins/maxCoins + 17) * coinsTextMeshPro;
-
 			coinsText.text = "Coins: " + coins.ToString();
 		}
 	}
@@ -83,8 +39,6 @@ public class ScoreBoard : MonoBehaviour
 
 		scoreText.text = "Score: " + score.ToString();
 		coinsText.text = "Coins: " + coins.ToString();
-		Score = 0;
-		Coins = 0;
 	}
 
 	/// <summary>
@@ -92,9 +46,10 @@ public class ScoreBoard : MonoBehaviour
 	/// </summary>
 	public void OnEnemyDeath ()
 	{
-		Score++;
+		score++;
+		scoreText.text = "Score: " + score.ToString();
 
-		// if (score % 10 == 0)
-		// 	Spawner.instance.LevelUp();
+		if (score % 10 == 0)
+			Spawner.instance.LevelUp();
 	}
 }

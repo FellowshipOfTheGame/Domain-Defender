@@ -16,10 +16,6 @@ public class Shoot : MonoBehaviour
     [Tooltip("Wait time between shots")]
     public float cooldown;
     public int numberOfBullets;
-    public int numberOfHits;
-    public int damage;
-    public bool drillPowerUp = false;
-    public int hits;
 
     public int type;
     private bool canAttack = true;
@@ -56,12 +52,7 @@ public class Shoot : MonoBehaviour
         {
             GameObject instance = Instantiate(projectile, spawns[i], this.transform.rotation);
             instance.GetComponent<Rigidbody2D>().velocity = this.transform.up * speed;
-            instance.GetComponent<BulletAnimHandle>().Initialize(type);
-            if (drillPowerUp)
-                instance.GetComponent<Projectile>().Initialize(damage, hits);
-            else
-                instance.GetComponent<Projectile>().Initialize(damage, 1);
-
+            instance.transform.GetComponent<BulletAnimHandle>().Initialize(type);
         }
 
         // Waits "cooldown" seconds to enable player to shoot again 

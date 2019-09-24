@@ -43,7 +43,7 @@ public class Hexagon : MonoBehaviour
     /// <summary>
     /// Deactivates shield
     /// </summary>
-    public void DeactivateShield()
+    private void DeactivateShield()
     {
         hasShield = false;
         AnimManager.instance.hexagon.SetShield(false);
@@ -51,23 +51,6 @@ public class Hexagon : MonoBehaviour
 
     private void Reset()
     {
-        Time.timeScale = 0f;
-        int score = ScoreBoard.instance.Score;
-        int coins = ScoreBoard.instance.Coins;
-
-        // If everything is ok
-        if (score != -1  && coins != -1)
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("score", score.ToString());
-            form.AddField("money", coins.ToString());
-            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene));
-        }
-    }
-
-    private void GoToUpgradesScene(PlayerStats player)
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

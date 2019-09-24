@@ -70,10 +70,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -81,32 +81,10 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +108,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50501e1b04489184ab5ccfe7bbf2609d
+      spriteID: 86f6c3e6b1dee8d4c80919eab3de94dc
       vertices: []
       indices: 
       edges: []
@@ -150,7 +128,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 215135875c9b32144af106053842383b
+      spriteID: 8faa4f46729e0ce48b3ba13ee95b3ef3
       vertices: []
       indices: 
       edges: []
@@ -170,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25ef57479fff3c144bf1ace1bc180173
+      spriteID: f59d6386731803940906dedff7ad7971
       vertices: []
       indices: 
       edges: []
@@ -190,7 +168,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d0b61f413a291c49acf0cf42b67c30b
+      spriteID: a82b5cdb924863c449e6be7562d5c9e6
       vertices: []
       indices: 
       edges: []
@@ -210,7 +188,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19956fe47b699c34f81ed6a45352f541
+      spriteID: ae49251960c9a7c4c89e2edf5ebeb53d
       vertices: []
       indices: 
       edges: []
@@ -230,7 +208,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1da333a1ccf0a0048bff15f96142410f
+      spriteID: 489a6db8bf34aaf43964f8810269f012
       vertices: []
       indices: 
       edges: []
@@ -250,7 +228,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 687ea8dc97477324dbb2209c755cf7c1
+      spriteID: 563601c781bce1744a717942343f1494
       vertices: []
       indices: 
       edges: []
@@ -270,7 +248,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff224c3954586354ab938aa588fbd3cc
+      spriteID: e6b9a6e3c570e0c41a4ae4e8b33a3875
       vertices: []
       indices: 
       edges: []
@@ -290,7 +268,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c64da5c1550334c4d8cd144acdecd913
+      spriteID: 32d232a381d35e74abd6f43c9259bbf3
       vertices: []
       indices: 
       edges: []
@@ -310,7 +288,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90cdb6cf1b4b4ab49b0c66cdd774dbcd
+      spriteID: 32a5ddb2919d2634f8f1ce0c65ebb7f7
       vertices: []
       indices: 
       edges: []
@@ -318,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c0e52e2c09f7e1f4aa84ecf71aad5fe0
+    spriteID: d256d022f6e3e634fb930fcda0c17f76
     vertices: []
     indices: 
     edges: []

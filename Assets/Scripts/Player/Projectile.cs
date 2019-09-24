@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int damage;
     [Tooltip("Number of hits on enemies before exploding")]
     [SerializeField] private int maxHits;
-    [SerializeField] int hits = 0;
+    private int hits = 0;
 
 
     /// <summary>
@@ -29,20 +29,14 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (--hits == 0)
+            if (++hits == maxHits)
                 this.GetComponent<Collider2D>().enabled = false;
 
             other.GetComponent<Enemy>().Life -= damage;
 
-            if (hits == 0)
+            if (hits == maxHits)
                 Destroy(this.gameObject);
 
         }
-    }
-    
-    public void Initialize(int damage, int hits)
-    {
-        this.damage = damage;
-        this.hits = hits;
     }
 }
