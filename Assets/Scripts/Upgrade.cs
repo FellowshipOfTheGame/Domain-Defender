@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Upgrade
 {
     public int[] cost;
-    public int[] value;
+    public float[] value;
 }
 
 public class Upgrades
