@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: "Assets/Scenes/ORecome\xE7o.unity"
     guid: 802dc3ed4acb0ae479e4d58c3d5dbe95
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: b3022fadf01326d44b09d5b2b1d51a91
+  - enabled: 1
     path: Assets/Scenes/ORecomecoComArte.unity
     guid: aed3f5aef7d7a094aa8b116c244d59a4
   m_configObjects: {}

@@ -58,7 +58,6 @@ public class Spawner : MonoBehaviour
 
     public void LevelUp()
     {
-        Debug.Log("Leveling Up");
         timeBetweenSpawns *= (1 - timeBetweenSpawnsDecreasePercentage);
         waveSize = (int)Mathf.Ceil(waveSize * 1f + waveIncreasePercentage);
         spawnedEnemiesOnThisWave = 0;
@@ -100,7 +99,6 @@ public class Spawner : MonoBehaviour
         }
         spawnedEnemies.sum++;
         spawnedEnemiesOnThisWave++;
-        Debug.Log(spawnedEnemiesOnThisWave);
 
         if (spawnedEnemiesOnThisWave == waveSize)
             LevelUp();

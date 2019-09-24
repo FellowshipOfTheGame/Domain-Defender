@@ -14,8 +14,12 @@ public class PowerUps : MonoBehaviour
     [SerializeField] float baseCadence;
     [SerializeField] float cadenceMultiplier;
     [SerializeField] float cadencePowerUpDuration;
-    [SerializeField] float drillPowerUpDuration;    
+    [SerializeField] float drillPowerUpDuration;
+    [SerializeField] float shieldPowerUpDuration;
     [SerializeField] int numberOfBullets;
+    [SerializeField] int numberOfHits;
+    [SerializeField] int damage;
+    PlayerStats playerStats;
 
 
     private enum Projectiles { normal = 0, drill = 1 };
@@ -29,9 +33,37 @@ public class PowerUps : MonoBehaviour
         if (playerShoot == null)
             playerShoot = GetComponent<Shoot>();
 
+
+        GetData();
+
+    }
+
+    private void GetData()
+    {
+        Time.timeScale = 0;
+
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback));
+        
+    }
+
+    private void GetDataCallback(PlayerStats playerStats)
+    {
+        this.playerStats = playerStats;
+
+        baseCadence = 1f / StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]];
+        cadenceMultiplier = StatUpgradeMenu.upgradeableStats[(int)StatType.FireRateBoost].value[playerStats[StatType.FireRateBoost]];
+        numberOfBullets = (int)StatUpgradeMenu.upgradeableStats[(int)StatType.NumOfBullets].value[playerStats[StatType.NumOfBullets]];
+        shieldPowerUpDuration = StatUpgradeMenu.upgradeableStats[(int)StatType.Shield].value[playerStats[StatType.Shield]];
+        numberOfHits = (int)StatUpgradeMenu.upgradeableStats[(int)StatType.PenetratingShots].value[playerStats[StatType.PenetratingShots]];
+        damage = (int)StatUpgradeMenu.upgradeableStats[(int)StatType.Damage].value[playerStats[StatType.Damage]];
+
         ResetProjectile();
         ResetCadence();
+        ResetShield();
+        playerShoot.damage = damage;
+        playerShoot.hits = numberOfHits;
         playerShoot.numberOfBullets = numberOfBullets;
+        Time.timeScale = 1;
     }
 
 
@@ -40,7 +72,15 @@ public class PowerUps : MonoBehaviour
     /// </summary>
     public void ShieldPowerUp()
     {
+        CancelInvoke("ResetShield");
         hexagon.ActivateShield();
+        Invoke("ResetShield", shieldPowerUpDuration);
+    }
+
+    public void ResetShield()
+    {
+        hexagon.DeactivateShield();
+        CancelInvoke("ResetShield");
     }
 
     /// <summary>
@@ -50,6 +90,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetProjectile");
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.drill];
+        playerShoot.drillPowerUp = true;
         Invoke("ResetProjectile", drillPowerUpDuration);
     }
 
@@ -59,6 +100,8 @@ public class PowerUps : MonoBehaviour
     private void ResetProjectile()
     {
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
+        playerShoot.drillPowerUp = false;
+        CancelInvoke("ResetProjectile");
     }
     
     /// <summary>
@@ -79,5 +122,6 @@ public class PowerUps : MonoBehaviour
     {
         playerShoot.cooldown = baseCadence;
         playerShoot.type = 0;
+        CancelInvoke("ResetCadence");
     }
 }
