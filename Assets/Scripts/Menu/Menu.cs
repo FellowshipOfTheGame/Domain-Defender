@@ -90,4 +90,9 @@ public class Menu : MonoBehaviour {
 			ShowError(error);
 		}
 	}
+
+	public void PlayGame()
+	{
+		GameManager.StartGame();
+	}
 }
