@@ -68,6 +68,6 @@ public class Hexagon : MonoBehaviour
     private void GoToUpgradesScene(PlayerStats player)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Menu");
+        GameManager.instance.BackToMenu();
     }
 }

@@ -94,6 +94,6 @@ public class Menu : MonoBehaviour {
 
 	public void PlayGame()
 	{
-		GameManager.StartGame();
+		GameManager.instance.StartGame();
 	}
 }

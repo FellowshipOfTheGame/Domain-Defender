@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static ShipType? currentShipType = null;
     public static bool backFromGameScene = false;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip[] clips;
 
     // Start is called before the first frame update
     void Start()
@@ -18,10 +20,23 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
 
         DontDestroyOnLoad(this.gameObject);
+        
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clips[0];
+        audioSource.Play();
     }
 
-    public static void StartGame()
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        audioSource.clip = clips[0];
+        audioSource.Play();
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene("ORecomecoComArte");
+        audioSource.clip = clips[1];
+        audioSource.Play();
     }
 }
