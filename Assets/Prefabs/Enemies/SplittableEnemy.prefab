@@ -103,6 +103,7 @@ MonoBehaviour:
     type: 3}
   knockBackDistance: 3
   trojanHorse: 0
+  timeToKill: 0.25
 --- !u!61 &7186544672237272293
 BoxCollider2D:
   m_ObjectHideFlags: 0

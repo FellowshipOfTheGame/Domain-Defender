@@ -19,7 +19,9 @@ public class PowerUps : MonoBehaviour
     [SerializeField] int numberOfBullets;
     [SerializeField] int numberOfHits;
     [SerializeField] int damage;
-    PlayerStats playerStats;
+    public PlayerStats playerStats;
+    public int upgradesLevel;
+    public float dps;
 
 
     private enum Projectiles { normal = 0, drill = 1 };
@@ -33,9 +35,7 @@ public class PowerUps : MonoBehaviour
         if (playerShoot == null)
             playerShoot = GetComponent<Shoot>();
 
-
         GetData();
-
     }
 
     private void GetData()
@@ -63,6 +63,12 @@ public class PowerUps : MonoBehaviour
         playerShoot.damage = damage;
         playerShoot.hits = numberOfHits;
         playerShoot.numberOfBullets = numberOfBullets;
+     
+        CalculateUpgradesLevel();
+        CalculateDPS();
+        Spawner.instance.Initialize(dps);    
+     
+     
         Time.timeScale = 1;
     }
 
@@ -123,5 +129,22 @@ public class PowerUps : MonoBehaviour
         playerShoot.cooldown = baseCadence;
         playerShoot.type = 0;
         CancelInvoke("ResetCadence");
+    }
+
+    private void CalculateDPS()
+    {
+        float damage = StatUpgradeMenu.upgradeableStats[(int)StatType.Damage].value[playerStats[StatType.Damage]];
+        float bullets = StatUpgradeMenu.upgradeableStats[(int)StatType.NumOfBullets].value[playerStats[StatType.NumOfBullets]];
+        float fireRate = StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]];
+        
+        dps = damage * bullets * fireRate;
+    }
+
+    private void CalculateUpgradesLevel()
+    {
+        upgradesLevel = 1;
+
+        for (int i = 0; i < playerStats.upgradeLevel.Length; i++)
+            upgradesLevel += playerStats.upgradeLevel[i];
     }
 }

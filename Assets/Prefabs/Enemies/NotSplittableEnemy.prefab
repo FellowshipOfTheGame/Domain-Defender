@@ -102,6 +102,7 @@ MonoBehaviour:
   splitResultEnemy: {fileID: 0}
   knockBackDistance: 4
   trojanHorse: 0
+  timeToKill: 0.25
 --- !u!61 &5606214294604898823
 BoxCollider2D:
   m_ObjectHideFlags: 0

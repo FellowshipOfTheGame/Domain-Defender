@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     [HideInInspectorIfNot(nameof(split))]
     [Tooltip("If selected, it will split to all lanes on its death")]
     [SerializeField] private bool trojanHorse;
+    [SerializeField] private float timeToKill;
 
     private Vector3 center = Vector3.zero;
     private bool movingToLane = false;
@@ -69,6 +70,12 @@ public class Enemy : MonoBehaviour
                 lane = value;
         }
     }
+
+    private void Start()
+    {
+        life = (int)Mathf.Ceil(Spawner.instance.dps * timeToKill);
+    }
+
 
     /// <summary>
     /// Moves the enemy in direction of the center, or to its start position
