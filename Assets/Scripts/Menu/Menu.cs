@@ -9,23 +9,24 @@ public class Menu : MonoBehaviour {
 	[SerializeField] InputField loginUsername, loginPassword;
 	[SerializeField] InputField signupUsername, signupPassword, signupConfirm;
 	[SerializeField] TextMeshProUGUI errorMessage;
-
-
 	public bool login = true;
-	public GameObject loginTab, signupTab, mainTab, logoutButton;
+	public GameObject loginTab, signupTab, mainTab, logoutButton, shipTab, statsTab;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		Initialize();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void Initialize(){
 		logoutButton.SetActive(login);
+		if(GameManager.backFromGameScene)
+		{
+			mainTab.SetActive(true);
+			shipTab.SetActive(true);
+			statsTab.SetActive(true);
+			GameManager.backFromGameScene = false;
+		}
 	}
 
 	public void Logout(){
