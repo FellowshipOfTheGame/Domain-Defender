@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static ShipType? currentShipType = null;
+    public static bool backFromGameScene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +23,5 @@ public class GameManager : MonoBehaviour
     public static void StartGame()
     {
         SceneManager.LoadScene("ORecomecoComArte");
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

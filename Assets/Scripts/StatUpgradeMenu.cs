@@ -25,6 +25,7 @@ public class StatUpgradeMenu : MonoBehaviour
         public TextMeshProUGUI nextLevel;
         public TextMeshProUGUI currentValue;
         public TextMeshProUGUI nextValue;
+        public TextMeshProUGUI highscore;
         public Button upgradeButton;
     }
 
@@ -38,21 +39,7 @@ public class StatUpgradeMenu : MonoBehaviour
 
     private void Start()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", "XxDarkChickenxX");
-        form.AddField("password", "galinha123");
-
-        StartCoroutine(NetworkManager.PostRequest<Token>("/login", form, ValidateLogin));
-    }
-
-    private void ValidateLogin(Token token)
-    {
-        NetworkManager.token = token.token;
-        playerStats = token.player;
-        Debug.Log(token.token);
-
-        // StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo));
-        StartCoroutine(NetworkManager.GetRequest<HighScores>("/highScores", LoadHighscores));
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo));
         StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo));
     }
 
@@ -107,6 +94,7 @@ public class StatUpgradeMenu : MonoBehaviour
             uiReferences.currentValue.text = selectedStat.value[level].ToString();
             uiReferences.nextValue.text = selectedStat.value[level+1].ToString();
             uiReferences.coins.text = playerStats.money.ToString();
+            uiReferences.highscore.text = playerStats.highScore.ToString();
 
             if(playerStats.money < selectedStat.cost[level])
                 uiReferences.upgradeButton.enabled = false;
