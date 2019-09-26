@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     private int spawnedEnemiesOnThisWave = 0;
     [SerializeField] float waveIncreasePercentage;
     [SerializeField] float timeBetweenSpawnsDecreasePercentage;
+    public float dps;
 
 
     public float coinDropProbability;
@@ -52,13 +53,16 @@ public class Spawner : MonoBehaviour
             Vector3 direction = Quaternion.Euler(0f, 0f, angle) * Vector3.up;
             spawns[i] = direction * spawnDistance;
         }
+    }
 
-        StartCoroutine(StartSpawner());
+    public void Initialize(float dps)
+    {
+        this.dps = dps;
+        StartCoroutine(StartSpawner());       
     }
 
     public void LevelUp()
     {
-        Debug.Log("Leveling Up");
         timeBetweenSpawns *= (1 - timeBetweenSpawnsDecreasePercentage);
         waveSize = (int)Mathf.Ceil(waveSize * 1f + waveIncreasePercentage);
         spawnedEnemiesOnThisWave = 0;
@@ -100,7 +104,6 @@ public class Spawner : MonoBehaviour
         }
         spawnedEnemies.sum++;
         spawnedEnemiesOnThisWave++;
-        Debug.Log(spawnedEnemiesOnThisWave);
 
         if (spawnedEnemiesOnThisWave == waveSize)
             LevelUp();

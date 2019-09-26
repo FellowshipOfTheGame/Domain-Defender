@@ -7,7 +7,7 @@ using TMPro;
 
 public class SelectableStatUpgrade : MonoBehaviour, ISelectHandler
 {
-    public PlayerStats.StatType statType;
+    public StatType statType;
     [SerializeField] string measurementUnit;
     [SerializeField] TextMeshProUGUI measurementUnitText;
 

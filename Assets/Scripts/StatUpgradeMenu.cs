@@ -24,7 +24,8 @@ public class StatUpgradeMenu : MonoBehaviour
         public TextMeshProUGUI currentLevel;
         public TextMeshProUGUI nextLevel;
         public TextMeshProUGUI currentValue;
-        public Slider sublevelSlider;
+        public TextMeshProUGUI nextValue;
+        public TextMeshProUGUI highscore;
         public Button upgradeButton;
     }
 
@@ -33,48 +34,70 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] GameObject selectionIcon;
     [SerializeField] PlayerStats playerStats;
     [SerializeField] GameObject defaultSelected;
-    PlayerStats.Stat selectedStat;
+    public static Upgrade[] upgradeableStats;
+    StatType selectedStatType;
 
     private void Start()
     {
-        playerStats.Coins = 4000;
-        uiReferences.coins.text = playerStats.Coins.ToString();
-        Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected);   
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo));
+        StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo));
     }
 
-    public void Select(PlayerStats.StatType selectedStatType, GameObject selectedObject)
+    private void LoadPlayerInfo(PlayerStats stats)
+    {
+        playerStats = stats;
+        UpdateUI();
+    }
+
+    private void LoadUpgradeInfo(Upgrades upgrades)
+    {
+        upgradeableStats = upgrades.upgrades;
+        Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected); 
+    }
+
+    private void LoadHighscores(HighScores upgrades)
+    {
+        // upgradeableStats = upgrades.upgrades;
+        // Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected); 
+    }
+
+    public void Select(StatType selectedStatType, GameObject selectedObject)
     {
         selectionIcon.transform.position = selectedObject.transform.position;
-        selectedStat = playerStats[selectedStatType];
+        this.selectedStatType = selectedStatType;
         
         UpdateUI();
     }
 
     public void Upgrade()
     {
-        playerStats.Coins -= selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel];
-        uiReferences.coins.text = playerStats.Coins.ToString();
+        WWWForm form = new WWWForm();
+        form.AddField("upgrade", ((int)selectedStatType).ToString());
 
-        selectedStat.sublevel++;
-        if(selectedStat.sublevel == selectedStat.numOfSubLevels)
-        {
-            selectedStat.sublevel = 0;
-            selectedStat.level++;
-        }
+        StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player/upgrade", form, FinishUpgrade));
+    }
 
+    private void FinishUpgrade(PlayerStats player)
+    {
+        playerStats = player;
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        selectedStat.currentValue = selectedStat.values[selectedStat.level];
-        uiReferences.currentLevel.text = selectedStat.level.ToString();
-        uiReferences.nextLevel.text = (selectedStat.level + 1).ToString();
-        uiReferences.cost.text = selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel].ToString();
-        uiReferences.currentValue.text = selectedStat.currentValue.ToString();
-        uiReferences.sublevelSlider.value = uiReferences.sublevelSlider.maxValue / selectedStat.numOfSubLevels * selectedStat.sublevel;
+        if(upgradeableStats != null && playerStats != null)
+        {
+            Upgrade selectedStat = upgradeableStats[(int)selectedStatType];
+            int level = playerStats[selectedStatType];
 
-        if(playerStats.Coins < selectedStat.costs[selectedStat.level].subCosts[selectedStat.sublevel])
-            uiReferences.upgradeButton.enabled = false;
+            uiReferences.cost.text = selectedStat.cost[level].ToString();
+            uiReferences.currentValue.text = selectedStat.value[level].ToString();
+            uiReferences.nextValue.text = selectedStat.value[level+1].ToString();
+            uiReferences.coins.text = playerStats.money.ToString();
+            uiReferences.highscore.text = playerStats.highScore.ToString();
+
+            if(playerStats.money < selectedStat.cost[level])
+                uiReferences.upgradeButton.enabled = false;
+        }
     }
 }
