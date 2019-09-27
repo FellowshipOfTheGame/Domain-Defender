@@ -115,7 +115,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetProjectile");
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.drill];
-        playerShoot.type = 2;
+        BulletAnimHandle.drill = true;
         playerShoot.drillPowerUp = true;
         Invoke("ResetProjectile", drillPowerUpDuration);
     }
@@ -127,7 +127,7 @@ public class PowerUps : MonoBehaviour
     {
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
         playerShoot.drillPowerUp = false;
-        playerShoot.type = 0;
+        BulletAnimHandle.drill = false;
         CancelInvoke("ResetProjectile");
     }
     
@@ -138,7 +138,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetCadence");
         playerShoot.cooldown = baseCadence / cadenceMultiplier;
-        playerShoot.type = 1;
+        BulletAnimHandle.cadence = true;
         Invoke("ResetCadence", cadencePowerUpDuration);
     }
 
@@ -148,7 +148,7 @@ public class PowerUps : MonoBehaviour
     private void ResetCadence()
     {
         playerShoot.cooldown = baseCadence;
-        playerShoot.type = 0;
+        BulletAnimHandle.cadence = false;
         CancelInvoke("ResetCadence");
     }
 

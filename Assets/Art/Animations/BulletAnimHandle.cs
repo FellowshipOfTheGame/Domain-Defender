@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class BulletAnimHandle : MonoBehaviour {
 
-	static int doubleCadencePos = 0;
+	static int doubleCadencePos = 1;
+	public static bool cadence = false, drill = false;
 	public GameObject[] bullets;
+
+	public static float alternance = 0.07f;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
 
-	public void Initialize(int type){
-		foreach (GameObject gb in bullets)
-		gb.SetActive(false);
+	public void Initialize(){
+		if(cadence){
+			int index = 0;
+			if(!drill){
+				bullets[0].SetActive(false);
+				bullets[1].SetActive(true);
+				index = 1;
+			}
 
-		if(type != 1){
-				bullets[0].SetActive(true);
-		}else if (bullets.Length >= 3){
-			bullets[1+doubleCadencePos].SetActive(true);
-			doubleCadencePos=1-doubleCadencePos;
+			bullets[index].transform.localPosition = Vector3.right * alternance * doubleCadencePos;
+			doubleCadencePos = - doubleCadencePos;
+		}else if (!drill){
+			bullets[1].SetActive(false);
+			bullets[0].SetActive(true);
 		}
 	}
 	
