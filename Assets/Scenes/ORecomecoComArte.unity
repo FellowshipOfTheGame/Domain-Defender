@@ -2196,7 +2196,7 @@ MonoBehaviour:
   cadenceMultiplier: 3
   cadencePowerUpDuration: 5
   drillPowerUpDuration: 5
-  shieldPowerUpDuration: 0
+  shieldPowerUpDuration: 8
   numberOfBullets: 1
   numberOfHits: 0
   damage: 0

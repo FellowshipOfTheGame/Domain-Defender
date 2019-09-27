@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
 
     // Sounds
     [SerializeField] private AudioClip DieSound;
+    [SerializeField] private AudioClip SplitSound;
 
     private Vector3 center = Vector3.zero;
     private bool movingToLane = false;
@@ -53,7 +54,10 @@ public class Enemy : MonoBehaviour
             if (life <= 0)
             {
                 if (split)
+                {
+                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(SplitSound);
                     StartCoroutine(Split());
+                }
                 else
                 {
                     GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
@@ -200,6 +204,8 @@ public class Enemy : MonoBehaviour
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
         }
+
+
 
         Die();
     }
