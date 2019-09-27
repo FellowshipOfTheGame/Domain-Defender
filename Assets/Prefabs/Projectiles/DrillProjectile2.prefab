@@ -345,6 +345,7 @@ MonoBehaviour:
   maxHits: 2
   hits: 0
   AcertaInimigo: {fileID: 8300000, guid: ec98d19b766ca7a48a4a5d932f299201, type: 3}
+  Pew: {fileID: 8300000, guid: 9f55a583cba86574fa7aafd59b86eeb6, type: 3}
 --- !u!114 &1501562364820972187
 MonoBehaviour:
   m_ObjectHideFlags: 0

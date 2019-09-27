@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
 
     // Sound
     [SerializeField] private AudioClip AcertaInimigo;
+    [SerializeField] private AudioClip Pew;
 
 
     /// <summary>
@@ -50,5 +51,10 @@ public class Projectile : MonoBehaviour
     {
         this.damage = damage;
         this.hits = hits;
+    }
+
+    public void Awake()
+    {
+        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(Pew);
     }
 }
