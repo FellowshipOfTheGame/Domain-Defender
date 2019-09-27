@@ -10,6 +10,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int maxHits;
     [SerializeField] int hits = 0;
 
+    // Sound
+    [SerializeField] private AudioClip AcertaInimigo;
+
 
     /// <summary>
     /// Destroys the projectile if it gets out of the game area
@@ -33,6 +36,7 @@ public class Projectile : MonoBehaviour
                 this.GetComponent<Collider2D>().enabled = false;
 
             other.GetComponent<Enemy>().Life -= damage;
+            GameManager.instance.GetComponent<AudioSource>().PlayOneShot(AcertaInimigo);
 
             if (hits == 0)
                 Destroy(this.gameObject);
