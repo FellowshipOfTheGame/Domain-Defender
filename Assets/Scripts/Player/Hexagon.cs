@@ -61,8 +61,16 @@ public class Hexagon : MonoBehaviour
             WWWForm form = new WWWForm();
             form.AddField("score", score.ToString());
             form.AddField("money", coins.ToString());
-            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene));
+            // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
+            // ! Veja o script stat upgrade menu para exemplos.
+            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
         }
+    }
+
+    private void SubmitScoreError(string errorMessage)
+    {
+        Debug.Log("Erro ao submeter score: " + errorMessage);
+        // TODO: Lidar com erro. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
     }
 
     private void GoToUpgradesScene(PlayerStats player)

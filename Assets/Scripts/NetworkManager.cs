@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
+    [SerializeField] int timeout;
 
     private void Start()
     {
@@ -15,85 +16,87 @@ public class NetworkManager : MonoBehaviour
             Destroy(this);
     }
 
-    public static string baseUrl = "localhost:3000";
+    public static string baseUrl = "https://bixoquest.icmc.usp.br:443";
     public static string token = null;
 
     public delegate void OnStringAnswer(string data);
     public delegate void OnObjectReturn<T>(T stats);
-    public delegate void OnObjectReturnWithError<T>(T stats, string error);
+    public delegate void OnError(string error);
 
-    public static IEnumerator GetRequest<T>(string uri, OnObjectReturn<T> callback)
+    public static IEnumerator GetRequest<T>(string uri, OnObjectReturn<T> callback, OnError errorCallback)
     {
         UnityWebRequest uwr = UnityWebRequest.Get(baseUrl + uri);
+        uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
             uwr.SetRequestHeader("authorization", token);
 
         yield return uwr.SendWebRequest();
 
-        if (uwr.isNetworkError)
+        if (uwr.isNetworkError || uwr.isHttpError)
         {
             Debug.Log("Error While Sending: " + uwr.error);
+            errorCallback(uwr.error);
         }
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-            callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
+             if(uwr.responseCode == 200) // No error
+                callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
+            else
+                errorCallback(JsonUtility.FromJson<Message>(uwr.downloadHandler.text).message);
         }
     }
 
-    public static IEnumerator PostRequest<T>(string url, WWWForm form, OnObjectReturn<T> callback)
+    public static IEnumerator PostRequest<T>(string url, WWWForm form, OnObjectReturn<T> callback, OnError errorCallback)
     {
-        // WWWForm form = new WWWForm();
-        // form.AddField("myField", "myData");
-        // form.AddField("Game Name", "Mario Kart");
-
         UnityWebRequest uwr = UnityWebRequest.Post(baseUrl + url, form);
+        uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
             uwr.SetRequestHeader("authorization", token);
 
         yield return uwr.SendWebRequest();
 
-        if (uwr.isNetworkError)
+        if (uwr.isNetworkError || uwr.isHttpError)
         {
             Debug.Log("Error While Sending: " + uwr.error);
+            errorCallback(uwr.error);
         }
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
-            callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
+             if(uwr.responseCode == 200) // No error
+                callback(JsonUtility.FromJson<T>(uwr.downloadHandler.text));
+            else
+                errorCallback(JsonUtility.FromJson<Message>(uwr.downloadHandler.text).message);
         }
     }
 
-    public static IEnumerator AttemptLogin(bool signup, string username, string password, OnObjectReturnWithError<Token> callback)
+    public void AttemptLogin(string username, string password, OnObjectReturn<Token> callback, OnError errorCallback)
     {
-        string uri = signup ? "/register" : "/login";
+        string uri = "/login";
         WWWForm form = new WWWForm();
         form.AddField("username", username);
         form.AddField("password", password);
 
-        UnityWebRequest uwr = UnityWebRequest.Post(baseUrl + uri, form);
+        StartCoroutine(PostRequest(uri, form, callback, errorCallback));
+    }
 
-        yield return uwr.SendWebRequest();
+    public void AttemptSignup(string username, string password, string email, OnObjectReturn<Token> callback, OnError errorCallback)
+    {
+        string uri = "/login";
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+        form.AddField("password", password);
+        //form.AddField("email", email);
 
-        if (uwr.isNetworkError)
-        {
-            Debug.Log("Error While Sending: " + uwr.error);
-            callback(null, "Erro de conexão.");
-        }
-        else
-        {
-            Debug.Log("Received: " + uwr.downloadHandler.text);
-            if(uwr.responseCode == 200)
-                callback(JsonUtility.FromJson<Token>(uwr.downloadHandler.text), null);
-            else
-                callback(null, JsonUtility.FromJson<Message>(uwr.downloadHandler.text).errorMessage);
-        }
+        StartCoroutine(PostRequest(uri, form, callback, errorCallback));
     }
 }
 
+[System.Serializable]
 public class Message
 {
-    public string errorMessage;
+    public string message;
 }

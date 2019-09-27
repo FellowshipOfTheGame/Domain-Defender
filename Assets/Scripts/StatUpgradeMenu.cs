@@ -8,6 +8,8 @@ using TMPro;
 public class StatUpgradeMenu : MonoBehaviour
 {
     public static StatUpgradeMenu instance;
+    [SerializeField] LoadingPanel loadingPanel;
+    [SerializeField] GameObject rankingsTab;
 
     private void Awake()
     {
@@ -15,14 +17,13 @@ public class StatUpgradeMenu : MonoBehaviour
             instance = this;
         else if(instance != null)
             Destroy(this);   
+
     }
 
     [System.Serializable] struct UIReferences
     {
         public TextMeshProUGUI coins;
         public TextMeshProUGUI cost;
-        public TextMeshProUGUI currentLevel;
-        public TextMeshProUGUI nextLevel;
         public TextMeshProUGUI currentValue;
         public TextMeshProUGUI nextValue;
         public TextMeshProUGUI highscore;
@@ -36,11 +37,14 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] GameObject defaultSelected;
     public static Upgrade[] upgradeableStats;
     StatType selectedStatType;
+    GameObject currentTab;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo));
-        StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo));
+        currentTab = this.gameObject;
+        loadingPanel.StartLoading("Carregando...");
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo, LoadError));
+        StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo, LoadError));
     }
 
     private void LoadPlayerInfo(PlayerStats stats)
@@ -55,10 +59,23 @@ public class StatUpgradeMenu : MonoBehaviour
         Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected); 
     }
 
-    private void LoadHighscores(HighScores upgrades)
+    private void LoadError(string errorMessage)
     {
-        // upgradeableStats = upgrades.upgrades;
-        // Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected); 
+        Button.ButtonClickedEvent backToMenu = new Button.ButtonClickedEvent();
+        backToMenu.AddListener(() => currentTab.SetActive(false));
+        loadingPanel.ShowError("Ops...!", errorMessage, "Voltar", backToMenu);
+    }
+
+    public void OpenRankings(HighScores upgrades)
+    {
+        rankingsTab.SetActive(true);
+        loadingPanel.StartLoading("Carregando...");
+        StartCoroutine(NetworkManager.GetRequest<HighScores>("/highScores", LoadRankings, LoadError));
+    }
+
+    public void LoadRankings(HighScores rankings)
+    {
+
     }
 
     public void Select(StatType selectedStatType, GameObject selectedObject)
@@ -74,7 +91,8 @@ public class StatUpgradeMenu : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("upgrade", ((int)selectedStatType).ToString());
 
-        StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player/upgrade", form, FinishUpgrade));
+        loadingPanel.StartLoading("Carregando...");
+        StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player/upgrade", form, FinishUpgrade, LoadError));
     }
 
     private void FinishUpgrade(PlayerStats player)
@@ -87,6 +105,9 @@ public class StatUpgradeMenu : MonoBehaviour
     {
         if(upgradeableStats != null && playerStats != null)
         {
+            if(loadingPanel.gameObject.activeSelf)
+                loadingPanel.gameObject.SetActive(false);
+
             Upgrade selectedStat = upgradeableStats[(int)selectedStatType];
             int level = playerStats[selectedStatType];
 
