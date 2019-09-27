@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -189, y: 645.99994}
+  m_AnchoredPosition: {x: -188.99998, y: 645.99994}
   m_SizeDelta: {x: -432.6, y: -1346.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234785417
@@ -436,6 +436,7 @@ MonoBehaviour:
   waveSize: 1
   waveIncreasePercentage: 0.1
   timeBetweenSpawnsDecreasePercentage: 0.05
+  dps: 0
   coinDropProbability: 0.3
   powerUpDropProbability: 0.15
   coinPrefab: {fileID: 5063078456923338586, guid: b5ea8f78975b53b41b1a70eff492203e,
@@ -2026,6 +2027,14 @@ MonoBehaviour:
   numberOfBullets: 1
   numberOfHits: 0
   damage: 0
+  playerStats:
+    username: 
+    money: 0
+    upgradeLevel: 
+    highScore: 0
+    lastLogin: 0
+  upgradesLevel: 0
+  dps: 0
 --- !u!114 &7414091922838344727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,8 +2050,7 @@ MonoBehaviour:
   speed: 5
   distanceBetweenProjectiles: 0.3
   projectileSpawn: {fileID: 1445937010}
-  projectile: {fileID: 4927902641577794764, guid: 61da53f983944bb4b98a7f1e6355a462,
-    type: 3}
+  projectile: {fileID: 1255254745927532, guid: 612957a7895187b4d9dc347bea17f83b, type: 3}
   cooldown: 0.3
   numberOfBullets: 1
   numberOfHits: 0

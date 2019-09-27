@@ -96,6 +96,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetProjectile");
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.drill];
+        playerShoot.type = 2;
         playerShoot.drillPowerUp = true;
         Invoke("ResetProjectile", drillPowerUpDuration);
     }
@@ -107,6 +108,7 @@ public class PowerUps : MonoBehaviour
     {
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
         playerShoot.drillPowerUp = false;
+        playerShoot.type = 0;
         CancelInvoke("ResetProjectile");
     }
     
