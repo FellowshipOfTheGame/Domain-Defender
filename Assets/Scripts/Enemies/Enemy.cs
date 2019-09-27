@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool trojanHorse;
     [SerializeField] private float timeToKill;
 
+    // Sounds
+    [SerializeField] private AudioClip DieSound;
+
     private Vector3 center = Vector3.zero;
     private bool movingToLane = false;
     private Vector3 startPosition;
@@ -52,7 +55,10 @@ public class Enemy : MonoBehaviour
                 if (split)
                     StartCoroutine(Split());
                 else
+                {
+                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
                     Die();
+                }
 
                 ScoreBoard.instance.OnEnemyDeath();
             }

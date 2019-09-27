@@ -15,7 +15,7 @@ public class NetworkManager : MonoBehaviour
             Destroy(this);
     }
 
-    public static string baseUrl = "localhost:3000";
+    public static string baseUrl = "https://bixoquest.icmc.usp.br:443";
     public static string token = null;
 
     public delegate void OnStringAnswer(string data);

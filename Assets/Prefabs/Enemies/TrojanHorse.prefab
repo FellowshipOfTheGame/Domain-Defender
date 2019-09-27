@@ -104,6 +104,7 @@ MonoBehaviour:
   knockBackDistance: 3
   trojanHorse: 1
   timeToKill: 0.25
+  DieSound: {fileID: 8300000, guid: 0b7e1c5ed68530340af1d9de8506692d, type: 3}
 --- !u!61 &4002621636050489422
 BoxCollider2D:
   m_ObjectHideFlags: 0
