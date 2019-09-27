@@ -7,10 +7,10 @@ using TMPro;
 public class Menu : MonoBehaviour {
 
 	[SerializeField] InputField loginUsername, loginPassword;
-	[SerializeField] InputField signupUsername, signupPassword, signupConfirm;
+	[SerializeField] InputField signupUsername, signupPassword, signupConfirm, signupEmail;
 	[SerializeField] TextMeshProUGUI errorMessage;
 	public bool login = true;
-	public GameObject loginTab, signupTab, mainTab, logoutButton, shipTab, statsTab;
+	public GameObject loginTab, signupTab, mainTab, logoutButton, shipTab, statsTab, loadingPanel;
 
 	// Use this for initialization
 	void Start ()
@@ -46,50 +46,48 @@ public class Menu : MonoBehaviour {
 	public void AttemptLogin()
 	{
 		if(loginUsername.text.Length == 0)
-			ShowError("Insira um username");
+			ShowLoginError("Insira um username");
 		else if(loginPassword.text.Length == 0)
-			ShowError("Insira uma senha");
+			ShowLoginError("Insira uma senha");
 		else
 		{
-			StartCoroutine(NetworkManager.AttemptLogin(false, loginUsername.text, loginPassword.text, FinishLogin));
+			loadingPanel.SetActive(true);
+			NetworkManager.instance.AttemptLogin(loginUsername.text, loginPassword.text, FinishLogin, ShowLoginError);
 		}
 	}
 
 	public void AttemptSignup()
 	{
 		if(signupUsername.text.Length == 0)
-			ShowError("Insira um username");
+			ShowLoginError("Insira um username");
 		else if(signupPassword.text.Length <= 6)
-			ShowError("Sua senha deve ter mais que 6 caracteres");
+			ShowLoginError("Sua senha deve ter mais que 6 caracteres");
 		else if(signupPassword.text != signupConfirm.text)
-			ShowError("Suas senhas não são iguais");
+			ShowLoginError("Suas senhas não são iguais");
 		else
 		{
-			StartCoroutine(NetworkManager.AttemptLogin(true, signupUsername.text, signupPassword.text, FinishLogin));
+			loadingPanel.SetActive(true);
+			NetworkManager.instance.AttemptSignup(signupUsername.text, signupPassword.text, signupEmail.text, FinishLogin, ShowLoginError);
 		}
 	}
 
-	void ShowError(string errorMessage)
+	void ShowLoginError(string errorMessage)
 	{
+		loadingPanel.SetActive(false);
 		this.errorMessage.text = errorMessage;
 	}
 
-	public void FinishLogin(Token token, string error)
+	public void FinishLogin(Token token)
 	{
-		if(error == null)
-		{
-			errorMessage.text = "";
-			NetworkManager.token = token.token;
-			loginTab.SetActive(false);
-			signupTab.SetActive(false);
-			logoutButton.SetActive(true);
-			login = true;
-			mainTab.SetActive(true);
-		}
-		else
-		{
-			ShowError(error);
-		}
+		loadingPanel.SetActive(false);
+		errorMessage.text = "";
+		NetworkManager.token = token.token;
+		loginTab.SetActive(false);
+		signupTab.SetActive(false);
+		logoutButton.SetActive(true);
+		login = true;
+		mainTab.SetActive(true);
+
 	}
 
 	public void PlayGame()

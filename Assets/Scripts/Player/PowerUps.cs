@@ -42,8 +42,16 @@ public class PowerUps : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback));
+        // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
+        // ! Veja o script stat upgrade menu para exemplos.
+        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
         
+    }
+    
+    private void Error(string errorMessage)
+    {
+        Debug.Log("Error: " + errorMessage);
+        // TODO: Lidar com o erro. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
     }
 
     private void GetDataCallback(PlayerStats playerStats)
