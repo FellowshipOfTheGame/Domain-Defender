@@ -61,16 +61,23 @@ public class Hexagon : MonoBehaviour
         // If everything is ok
         if (score != -1  && coins != -1)
         {
-            WWWForm form = new WWWForm();
-            form.AddField("score", score.ToString());
-            form.AddField("money", coins.ToString());
-            // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
-            // ! Veja o script stat upgrade menu para exemplos.
+            if (score != 0)
+            {
+                WWWForm form = new WWWForm();
+                form.AddField("score", score.ToString());
+                form.AddField("money", coins.ToString());
+                // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
+                // ! Veja o script stat upgrade menu para exemplos.
 
-            Time.timeScale = 0;
-            loadingPanel.StartLoading("Carregando...");
-            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+                Time.timeScale = 0;
+                loadingPanel.StartLoading("Carregando...");
+                StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+            }
+            else
+                GoToUpgradesScene(null);
         }
+        else
+            GoToUpgradesScene(null);
     }
 
     private void SubmitScoreError(string errorMessage)
