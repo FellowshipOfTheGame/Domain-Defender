@@ -86,6 +86,15 @@ public class Spawner : MonoBehaviour
             enemyScript.BaseLife = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
             Debug.Log("Enemy life: " + enemyScript.Life);
 
+            // if splittable
+            if (enemyIndex == 1)
+                enemyScript.BaseLife *= 2;
+            // if trojan horse
+            if (enemyIndex == 2)
+                enemyScript.BaseLife *= 3;
+
+            
+
             Count(enemyIndex);
 
             // yield return new WaitForSeconds(timeBetweenSpawns);
