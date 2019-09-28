@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUps : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PowerUps : MonoBehaviour
     public int upgradesLevel;
     public float dps;
 
+    [SerializeField] private LoadingPanel loadingPanel;
+
 
     private enum Projectiles { normal = 0, drill = 1 };
 
@@ -40,10 +43,12 @@ public class PowerUps : MonoBehaviour
 
     private void GetData()
     {
-        Time.timeScale = 0;
 
         // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
         // ! Veja o script stat upgrade menu para exemplos.
+
+        Time.timeScale = 0;
+        loadingPanel.StartLoading("Carregando...");
         StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
         
     }
@@ -51,6 +56,11 @@ public class PowerUps : MonoBehaviour
     private void Error(string errorMessage)
     {
         Debug.Log("Error: " + errorMessage);
+
+        Button.ButtonClickedEvent backToMenu = new Button.ButtonClickedEvent();
+        backToMenu.AddListener(() => GameManager.instance.BackToMenu());
+        loadingPanel.ShowError("Ops! Ocorreu um erro!", errorMessage, "Voltar", backToMenu);
+        
         // TODO: Lidar com o erro. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
     }
 
@@ -77,6 +87,7 @@ public class PowerUps : MonoBehaviour
         Spawner.instance.Initialize(dps);    
      
      
+        loadingPanel.StopLoading();
         Time.timeScale = 1;
     }
 
@@ -104,6 +115,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetProjectile");
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.drill];
+        BulletAnimHandle.drill = true;
         playerShoot.drillPowerUp = true;
         Invoke("ResetProjectile", drillPowerUpDuration);
     }
@@ -115,6 +127,7 @@ public class PowerUps : MonoBehaviour
     {
         playerShoot.projectile = projectilePrefabs[(int)Projectiles.normal];
         playerShoot.drillPowerUp = false;
+        BulletAnimHandle.drill = false;
         CancelInvoke("ResetProjectile");
     }
     
@@ -125,7 +138,7 @@ public class PowerUps : MonoBehaviour
     {
         CancelInvoke("ResetCadence");
         playerShoot.cooldown = baseCadence / cadenceMultiplier;
-        playerShoot.type = 1;
+        BulletAnimHandle.cadence = true;
         Invoke("ResetCadence", cadencePowerUpDuration);
     }
 
@@ -135,7 +148,7 @@ public class PowerUps : MonoBehaviour
     private void ResetCadence()
     {
         playerShoot.cooldown = baseCadence;
-        playerShoot.type = 0;
+        BulletAnimHandle.cadence = false;
         CancelInvoke("ResetCadence");
     }
 

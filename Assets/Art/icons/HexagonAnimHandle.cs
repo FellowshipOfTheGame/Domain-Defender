@@ -16,11 +16,7 @@ public class HexagonAnimHandle : MonoBehaviour {
     //active = true -> turn on shield
     //active = false -> turno off shield
     public void SetShield(bool active){
-        if(active)
-            shield.SetTrigger("on");
-        else
-            shield.SetTrigger("off");
-        
+        shield.SetBool("on", active);
     }
 
     //final animation

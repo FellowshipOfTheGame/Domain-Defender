@@ -56,7 +56,7 @@ public class Shoot : MonoBehaviour
         {
             GameObject instance = Instantiate(projectile, spawns[i], this.transform.rotation);
             instance.GetComponent<Rigidbody2D>().velocity = this.transform.up * speed;
-            instance.GetComponent<BulletAnimHandle>().Initialize(type);
+            instance.GetComponent<BulletAnimHandle>().Initialize();
             if (drillPowerUp)
                 instance.GetComponent<Projectile>().Initialize(damage, hits);
             else
