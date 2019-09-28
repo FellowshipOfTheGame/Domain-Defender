@@ -11,6 +11,8 @@ public class Hexagon : MonoBehaviour
     [SerializeField] GameObject shield;
     [SerializeField] LoadingPanel loadingPanel;
     [SerializeField] PowerUps powerUps;
+
+    [SerializeField] private AudioSource ShieldDown;
     
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
@@ -50,6 +52,7 @@ public class Hexagon : MonoBehaviour
     public void DeactivateShield()
     {
         hasShield = false;
+        ShieldDown.Play();
         AnimManager.instance.hexagon.SetShield(false);
     }
 

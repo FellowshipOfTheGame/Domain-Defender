@@ -122,3 +122,4 @@ MonoBehaviour:
   speed: 0.02
   timeOnHexagon: 8
   blinkingTIme: 0
+  PowerSound: {fileID: 8300000, guid: c95c0e55292e8244a8afcb906adcc0eb, type: 3}

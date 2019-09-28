@@ -10,6 +10,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int maxHits;
     [SerializeField] int hits = 0;
 
+    // Sound
+    [SerializeField] private AudioClip AcertaInimigo;
+    [SerializeField] private AudioClip Pew;
+
 
     /// <summary>
     /// Destroys the projectile if it gets out of the game area
@@ -34,6 +38,9 @@ public class Projectile : MonoBehaviour
 
             other.GetComponent<Enemy>().Life -= damage;
 
+            if(other.GetComponent<Enemy>().Life > 0)
+                GameManager.instance.GetComponent<AudioSource>().PlayOneShot(AcertaInimigo);
+
             if (hits == 0)
                 Destroy(this.gameObject);
 
@@ -44,5 +51,10 @@ public class Projectile : MonoBehaviour
     {
         this.damage = damage;
         this.hits = hits;
+    }
+
+    public void Awake()
+    {
+        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(Pew);
     }
 }
