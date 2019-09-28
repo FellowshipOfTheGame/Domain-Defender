@@ -1225,11 +1225,11 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1332,6 +1332,11 @@ PrefabInstance:
       propertyPath: loadingPanel
       value: 
       objectReference: {fileID: 110833090}
+    - target: {fileID: 8299707280907666212, guid: 811c283ae443bb2438c9eba6bbda80a8,
+        type: 3}
+      propertyPath: powerUps
+      value: 
+      objectReference: {fileID: 7414091922838344726}
     - target: {fileID: 8299707280907666215, guid: 811c283ae443bb2438c9eba6bbda80a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1536,11 +1541,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:

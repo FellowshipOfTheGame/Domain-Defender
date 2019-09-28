@@ -19,7 +19,6 @@ public class Shoot : MonoBehaviour
     public int numberOfHits;
     public int damage;
     public bool drillPowerUp = false;
-    public int hits;
 
     public int type;
     private bool canAttack = true;
@@ -58,7 +57,7 @@ public class Shoot : MonoBehaviour
             instance.GetComponent<Rigidbody2D>().velocity = this.transform.up * speed;
             instance.GetComponent<BulletAnimHandle>().Initialize();
             if (drillPowerUp)
-                instance.GetComponent<Projectile>().Initialize(damage, hits);
+                instance.GetComponent<Projectile>().Initialize(damage, numberOfHits);
             else
                 instance.GetComponent<Projectile>().Initialize(damage, 1);
 

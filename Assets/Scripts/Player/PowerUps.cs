@@ -79,7 +79,7 @@ public class PowerUps : MonoBehaviour
         ResetCadence();
         ResetShield();
         playerShoot.damage = damage;
-        playerShoot.hits = numberOfHits;
+        playerShoot.numberOfHits = numberOfHits;
         playerShoot.numberOfBullets = numberOfBullets;
      
         CalculateUpgradesLevel();
@@ -167,5 +167,34 @@ public class PowerUps : MonoBehaviour
 
         for (int i = 0; i < playerStats.upgradeLevel.Length; i++)
             upgradesLevel += playerStats.upgradeLevel[i];
+    }
+
+    /// <summary>
+    /// Returns true if everything is ok, and false if a cheat is detected
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckUpgrades()
+    {
+        if (baseCadence != 1f / StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]])
+            return false;
+        if (cadenceMultiplier != StatUpgradeMenu.upgradeableStats[(int)StatType.FireRateBoost].value[playerStats[StatType.FireRateBoost]])
+            return false;
+        if (numberOfBullets != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.NumOfBullets].value[playerStats[StatType.NumOfBullets]])
+            return false;
+        if (shieldPowerUpDuration != StatUpgradeMenu.upgradeableStats[(int)StatType.Shield].value[playerStats[StatType.Shield]])
+            return false;
+        if (numberOfHits != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.PenetratingShots].value[playerStats[StatType.PenetratingShots]])
+            return false;
+        if (damage != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.Damage].value[playerStats[StatType.Damage]])
+            return false;
+
+        if (playerShoot.numberOfBullets != numberOfBullets)
+            return false;
+        if (playerShoot.numberOfHits != numberOfHits)
+            return false;
+        if (playerShoot.damage != damage)
+            return false;
+
+        return true;
     }
 }
