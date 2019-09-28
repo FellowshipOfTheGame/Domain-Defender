@@ -79,7 +79,7 @@ public class PowerUps : MonoBehaviour
         ResetCadence();
         ResetShield();
         playerShoot.damage = damage;
-        playerShoot.hits = numberOfHits;
+        playerShoot.numberOfHits = numberOfHits;
         playerShoot.numberOfBullets = numberOfBullets;
      
         CalculateUpgradesLevel();
@@ -167,5 +167,61 @@ public class PowerUps : MonoBehaviour
 
         for (int i = 0; i < playerStats.upgradeLevel.Length; i++)
             upgradesLevel += playerStats.upgradeLevel[i];
+    }
+
+    /// <summary>
+    /// Returns true if everything is ok, and false if a cheat is detected
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckUpgrades()
+    {
+        if (Mathf.Abs(baseCadence - (1f / StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]])) > 0.001f)
+        {
+            Debug.Log("Upgrade Cheat: base cadence\n" + baseCadence + " != " + 1f / StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]]);
+            return false;
+        }
+        if (Mathf.Abs(cadenceMultiplier - StatUpgradeMenu.upgradeableStats[(int)StatType.FireRateBoost].value[playerStats[StatType.FireRateBoost]]) > 0.001f)
+        {
+            Debug.Log("Upgrade Cheat: cadence multiplier");
+            return false;
+        }
+        if (numberOfBullets != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.NumOfBullets].value[playerStats[StatType.NumOfBullets]])
+        {
+            Debug.Log("Upgrade Cheat: number of bullets");
+            return false;
+        }
+        if (Mathf.Abs(shieldPowerUpDuration - StatUpgradeMenu.upgradeableStats[(int)StatType.Shield].value[playerStats[StatType.Shield]]) > 0.001f)
+        {
+            Debug.Log("Upgrade Cheat: shield duration");
+            return false;
+        }
+        if (numberOfHits != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.PenetratingShots].value[playerStats[StatType.PenetratingShots]])
+        {
+            Debug.Log("Upgrade Cheat: number of hits");
+            return false;
+        }
+        if (damage != (int)StatUpgradeMenu.upgradeableStats[(int)StatType.Damage].value[playerStats[StatType.Damage]])
+        {
+            Debug.Log("Upgrade Cheat: damage");
+            return false;
+        }
+
+        if (playerShoot.numberOfBullets != numberOfBullets)
+        {
+            Debug.Log("Upgrade Cheat: player shoot numebr of bullets");
+            return false;
+        }
+        if (playerShoot.numberOfHits != numberOfHits)
+        {
+            Debug.Log("Upgrade Cheat: player shoot number of hits");
+            return false;
+        }
+        if (playerShoot.damage != damage)
+        {
+            Debug.Log("Upgrade Cheat: player shoot damage");
+            return false;
+        }
+
+        return true;
     }
 }

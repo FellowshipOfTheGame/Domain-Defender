@@ -8,6 +8,8 @@ public class DangerArea : MonoBehaviour
     [SerializeField] Movement player;
     [SerializeField] GameObject warningLeft, warningRight, warningBack;
 
+    [SerializeField] AudioSource DangerSource;
+
     private bool[] lanesWarnings = new bool[6];
     private bool warnLeft, warnRight, warnBack;
 
@@ -70,6 +72,11 @@ public class DangerArea : MonoBehaviour
             warningRight.SetActive(true);
         else 
             warningRight.SetActive(false);
+
+        if (warnBack || warnLeft || warnRight)
+            DangerSource.enabled = true;
+        else
+            DangerSource.enabled = false;
     }
 
     /// <summary>
