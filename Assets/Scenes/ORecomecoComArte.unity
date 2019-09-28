@@ -287,6 +287,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234785415}
   m_CullTransparentMesh: 0
+--- !u!1001 &268866763
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4455837927072281542, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_Name
+      value: Sound Effects
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455837927072281541, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1336afeda6f966940979a643cb434e09, type: 3}
+--- !u!82 &268866764 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4455837927202117100, guid: 1336afeda6f966940979a643cb434e09,
+    type: 3}
+  m_PrefabInstance: {fileID: 268866763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &268866765 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4455837928469148791, guid: 1336afeda6f966940979a643cb434e09,
+    type: 3}
+  m_PrefabInstance: {fileID: 268866763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &274635146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,11 +1306,11 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1332,6 +1413,16 @@ PrefabInstance:
       propertyPath: loadingPanel
       value: 
       objectReference: {fileID: 110833090}
+    - target: {fileID: 8299707280907666212, guid: 811c283ae443bb2438c9eba6bbda80a8,
+        type: 3}
+      propertyPath: powerUps
+      value: 
+      objectReference: {fileID: 7414091922838344726}
+    - target: {fileID: 8299707280907666212, guid: 811c283ae443bb2438c9eba6bbda80a8,
+        type: 3}
+      propertyPath: ShieldDown
+      value: 
+      objectReference: {fileID: 268866764}
     - target: {fileID: 8299707280907666215, guid: 811c283ae443bb2438c9eba6bbda80a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1536,11 +1627,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1691,6 +1782,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1161686530}
+    - target: {fileID: 7222653922881260191, guid: 5c8ca0d5ad366694793fee8a667aa452,
+        type: 3}
+      propertyPath: DangerSource
+      value: 
+      objectReference: {fileID: 268866765}
     - target: {fileID: 7222653922107519779, guid: 5c8ca0d5ad366694793fee8a667aa452,
         type: 3}
       propertyPath: m_Radius
@@ -2853,7 +2949,6 @@ MonoBehaviour:
   numberOfHits: 0
   damage: 0
   drillPowerUp: 0
-  hits: 0
   type: 1
 --- !u!50 &7414091922838344728
 Rigidbody2D:

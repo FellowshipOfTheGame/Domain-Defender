@@ -103,6 +103,8 @@ MonoBehaviour:
   knockBackDistance: 4
   trojanHorse: 0
   timeToKill: 0.25
+  DieSound: {fileID: 8300000, guid: 0b7e1c5ed68530340af1d9de8506692d, type: 3}
+  SplitSound: {fileID: 8300000, guid: 9087326fb0bbe9a4a8e9d0eb5b82cc30, type: 3}
 --- !u!61 &5606214294604898823
 BoxCollider2D:
   m_ObjectHideFlags: 0

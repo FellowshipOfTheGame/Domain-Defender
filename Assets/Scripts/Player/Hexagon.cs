@@ -9,7 +9,10 @@ public class Hexagon : MonoBehaviour
 {
     private bool hasShield;
     [SerializeField] GameObject shield;
-    [SerializeField] private LoadingPanel loadingPanel;
+    [SerializeField] LoadingPanel loadingPanel;
+    [SerializeField] PowerUps powerUps;
+
+    [SerializeField] private AudioSource ShieldDown;
     
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
@@ -49,6 +52,7 @@ public class Hexagon : MonoBehaviour
     public void DeactivateShield()
     {
         hasShield = false;
+        ShieldDown.Play();
         AnimManager.instance.hexagon.SetShield(false);
     }
 
@@ -57,27 +61,36 @@ public class Hexagon : MonoBehaviour
         Time.timeScale = 0f;
         int score = ScoreBoard.instance.Score;
         int coins = ScoreBoard.instance.Coins;
+        bool noUpgradeCheat = powerUps.CheckUpgrades();
 
-        // If everything is ok
-        if (score != -1  && coins != -1)
+        if (noUpgradeCheat)
         {
-            if (score != 0)
+            // If everything is ok
+            if (score != -1  && coins != -1)
             {
-                WWWForm form = new WWWForm();
-                form.AddField("score", score.ToString());
-                form.AddField("money", coins.ToString());
-                // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
-                // ! Veja o script stat upgrade menu para exemplos.
+                if (score != 0)
+                {
+                    WWWForm form = new WWWForm();
+                    form.AddField("score", score.ToString());
+                    form.AddField("money", coins.ToString());
+                    // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
+                    // ! Veja o script stat upgrade menu para exemplos.
 
-                Time.timeScale = 0;
-                loadingPanel.StartLoading("Carregando...");
-                StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+                    Time.timeScale = 0;
+                    loadingPanel.StartLoading("Carregando...");
+                    StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+                }
+                else
+                    GoToUpgradesScene(null);
             }
             else
                 GoToUpgradesScene(null);
         }
         else
+        {
+            Debug.Log("Upgrade cheat detected");
             GoToUpgradesScene(null);
+        }
     }
 
     private void SubmitScoreError(string errorMessage)
