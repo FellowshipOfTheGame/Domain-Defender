@@ -238,6 +238,7 @@ public class Enemy : MonoBehaviour
         anim.Explode();
         this.GetComponent<Collider2D>().enabled = false;
         speed = 0.0f;
+        CancelInvoke();
         Invoke("Finish", 2.0f);
     }
 
