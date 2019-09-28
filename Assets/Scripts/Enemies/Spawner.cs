@@ -83,7 +83,7 @@ public class Spawner : MonoBehaviour
             enemy.transform.up = spawns[spawnIndex];
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             enemyScript.Lane = spawnIndex;
-            enemyScript.Life = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
+            enemyScript.BaseLife = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
             Debug.Log("Enemy life: " + enemyScript.Life);
 
             Count(enemyIndex);
