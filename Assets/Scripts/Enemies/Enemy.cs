@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
 
     private Collider2D col;
 
+    EnemyAnimHandle anim;
+
 
     public int Life
     {
@@ -80,11 +82,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // private void Start()
-    // {
-    //     life = (int)Mathf.Ceil(Spawner.instance.dps * timeToKill);
-    // }
+    private void Start()
+    {
+        anim = GetComponent<EnemyAnimHandle>();
+    }
 
+
+    public void TakeDamage(int value){
+        Life -= value;
+        anim.GetDamage();
+    }
 
     /// <summary>
     /// Moves the enemy in direction of the center, or to its start position
@@ -226,6 +233,14 @@ public class Enemy : MonoBehaviour
                 Spawner.instance.DropCoin(this.transform.position, this.transform.rotation);
         }           
 
+        anim.Explode();
+        this.GetComponent<Collider2D>().enabled = false;
+        speed = 0.0f;
+        CancelInvoke();
+        Invoke("Finish", 2.0f);
+    }
+
+    void Finish(){
         Destroy(this.gameObject);
     }
 
