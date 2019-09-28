@@ -24,6 +24,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject[] powerUpsPrefabs;
 
+    public AnimationCurve curve;
+
     public Vector3[] Spawns => spawns;
     Enemies spawnedEnemies;
 
@@ -82,7 +84,10 @@ public class Spawner : MonoBehaviour
 
             Count(enemyIndex);
 
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            // yield return new WaitForSeconds(timeBetweenSpawns);
+            Debug.Log("Current time: " + Time.timeSinceLevelLoad);
+            Debug.Log("Time until next spawn: " + curve.Evaluate(Time.timeSinceLevelLoad));
+            yield return new WaitForSeconds(curve.Evaluate(Time.timeSinceLevelLoad));
         }
     }
 
