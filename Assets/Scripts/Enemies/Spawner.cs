@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject[] powerUpsPrefabs;
 
     public AnimationCurve curve;
+    public AnimationCurve enemyLifeCurve;
 
     public Vector3[] Spawns => spawns;
     Enemies spawnedEnemies;
@@ -80,7 +81,10 @@ public class Spawner : MonoBehaviour
             // Quaternion rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, direction));
             GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawns[spawnIndex], Quaternion.identity);
             enemy.transform.up = spawns[spawnIndex];
-            enemy.GetComponent<Enemy>().Lane = spawnIndex;
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.Lane = spawnIndex;
+            enemyScript.Life = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
+            Debug.Log("Enemy life: " + enemyScript.Life);
 
             Count(enemyIndex);
 

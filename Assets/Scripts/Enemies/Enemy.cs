@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     [HideInInspectorIfNot(nameof(split))]
     [Tooltip("If selected, it will split to all lanes on its death")]
     [SerializeField] private bool trojanHorse;
-    [SerializeField] private float timeToKill;
 
     // Sounds
     [SerializeField] private AudioClip DieSound;
@@ -81,10 +80,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        life = (int)Mathf.Ceil(Spawner.instance.dps * timeToKill);
-    }
+    // private void Start()
+    // {
+    //     life = (int)Mathf.Ceil(Spawner.instance.dps * timeToKill);
+    // }
 
 
     /// <summary>
