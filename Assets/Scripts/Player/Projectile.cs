@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
             if (--hits == 0)
                 this.GetComponent<Collider2D>().enabled = false;
 
-            other.GetComponent<Enemy>().Life -= damage;
+            other.GetComponent<Enemy>().TakeDamage(damage);
 
             if (hits == 0)
                 Destroy(this.gameObject);
