@@ -60,6 +60,8 @@ public class Menu : MonoBehaviour {
 	{
 		if(signupUsername.text.Length == 0)
 			ShowLoginError("Insira um username");
+		else if(signupUsername.text.Length > 15)
+			ShowLoginError("Username não deve exceder 15 caracteres");
 		else if(signupPassword.text.Length <= 6)
 			ShowLoginError("Sua senha deve ter mais que 6 caracteres");
 		else if(signupPassword.text != signupConfirm.text)
@@ -87,7 +89,6 @@ public class Menu : MonoBehaviour {
 		logoutButton.SetActive(true);
 		login = true;
 		mainTab.SetActive(true);
-
 	}
 
 	public void PlayGame()

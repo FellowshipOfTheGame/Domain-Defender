@@ -9,7 +9,8 @@ public class StatUpgradeMenu : MonoBehaviour
 {
     public static StatUpgradeMenu instance;
     [SerializeField] LoadingPanel loadingPanel;
-    [SerializeField] GameObject rankingsTab;
+    [SerializeField] GameObject rankingsTab, rankingList;
+    [SerializeField] GameObject rankingItemPrefab;
 
     private void Awake()
     {
@@ -66,7 +67,7 @@ public class StatUpgradeMenu : MonoBehaviour
         loadingPanel.ShowError("Ops...!", errorMessage, "Voltar", backToMenu);
     }
 
-    public void OpenRankings(HighScores upgrades)
+    public void OpenRankings()
     {
         rankingsTab.SetActive(true);
         loadingPanel.StartLoading("Carregando...");
@@ -75,7 +76,14 @@ public class StatUpgradeMenu : MonoBehaviour
 
     public void LoadRankings(HighScores rankings)
     {
-
+        loadingPanel.StopLoading();
+        int placement = 1;
+        rankingsTab.SetActive(true);
+        foreach(HighScore highScore in rankings.highScores)
+        {
+            HighScoreItemUI currentItem = Instantiate(rankingItemPrefab, rankingList.transform).GetComponent<HighScoreItemUI>();
+            currentItem.SetScore(highScore, placement++);
+        }
     }
 
     public void Select(StatType selectedStatType, GameObject selectedObject)
