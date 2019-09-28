@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     [HideInInspectorIfNot(nameof(split))]
     [Tooltip("If selected, it will split to all lanes on its death")]
     [SerializeField] private bool trojanHorse;
-    [SerializeField] private float timeToKill;
 
     // Sounds
     [SerializeField] private AudioClip DieSound;
@@ -39,7 +38,20 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;
 
     private Collider2D col;
+    int baseLife;
 
+    EnemyAnimHandle anim;
+
+
+    public int BaseLife
+    {
+        get { return baseLife; }
+        set
+        {
+            Life = value;
+            baseLife = value;
+        }
+    }
 
     public int Life
     {
@@ -83,9 +95,14 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        life = (int)Mathf.Ceil(Spawner.instance.dps * timeToKill);
+        anim = GetComponent<EnemyAnimHandle>();
     }
 
+
+    public void TakeDamage(int value){
+        Life -= value;
+        anim.GetDamage();
+    }
 
     /// <summary>
     /// Moves the enemy in direction of the center, or to its start position
@@ -177,14 +194,18 @@ public class Enemy : MonoBehaviour
         Vector3 newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
         newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
         GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
-        instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+        Enemy enemy = instance.GetComponent<Enemy>();
+        enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+        enemy.Life = baseLife;
 
         // Instantiates a enemy right
         newEnemyLane = Mod(lane - 1, 6);
         newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
         newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
         instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
-        instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+        enemy = instance.GetComponent<Enemy>();
+        enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+        enemy.Life = baseLife;
 
         if (trojanHorse)
         {
@@ -195,14 +216,18 @@ public class Enemy : MonoBehaviour
             newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
-            instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+            enemy = instance.GetComponent<Enemy>();
+            enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+            enemy.Life = baseLife;
 
             // Instantiates a enemy two lanes right
             newEnemyLane = Mod(lane - 2, 6);
             newEnemySpawn = Spawner.instance.Spawns[newEnemyLane];
             newEnemySpawn = (newEnemySpawn - center).normalized * (distanceFromCenter + knockBackDistance);
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
-            instance.GetComponent<Enemy>().MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+            enemy = instance.GetComponent<Enemy>();
+            enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
+            enemy.Life = baseLife;
         }
 
 
@@ -227,6 +252,14 @@ public class Enemy : MonoBehaviour
                 Spawner.instance.DropCoin(this.transform.position, this.transform.rotation);
         }           
 
+        anim.Explode();
+        this.GetComponent<Collider2D>().enabled = false;
+        speed = 0.0f;
+        CancelInvoke();
+        Invoke("Finish", 2.0f);
+    }
+
+    void Finish(){
         Destroy(this.gameObject);
     }
 

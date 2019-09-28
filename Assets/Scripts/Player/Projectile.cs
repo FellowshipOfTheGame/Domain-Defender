@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
             if (--hits == 0)
                 this.GetComponent<Collider2D>().enabled = false;
 
-            other.GetComponent<Enemy>().Life -= damage;
+            other.GetComponent<Enemy>().TakeDamage(damage);
 
             if(other.GetComponent<Enemy>().Life > 0)
                 GameManager.instance.GetComponent<AudioSource>().PlayOneShot(AcertaInimigo);

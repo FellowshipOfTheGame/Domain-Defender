@@ -24,6 +24,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject[] powerUpsPrefabs;
 
+    public AnimationCurve curve;
+    public AnimationCurve enemyLifeCurve;
+
     public Vector3[] Spawns => spawns;
     Enemies spawnedEnemies;
 
@@ -78,11 +81,26 @@ public class Spawner : MonoBehaviour
             // Quaternion rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.up, direction));
             GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawns[spawnIndex], Quaternion.identity);
             enemy.transform.up = spawns[spawnIndex];
-            enemy.GetComponent<Enemy>().Lane = spawnIndex;
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.Lane = spawnIndex;
+            enemyScript.BaseLife = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
+            Debug.Log("Enemy life: " + enemyScript.Life);
+
+            // if splittable
+            if (enemyIndex == 1)
+                enemyScript.BaseLife *= 2;
+            // if trojan horse
+            if (enemyIndex == 2)
+                enemyScript.BaseLife *= 3;
+
+            
 
             Count(enemyIndex);
 
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            // yield return new WaitForSeconds(timeBetweenSpawns);
+            Debug.Log("Current time: " + Time.timeSinceLevelLoad);
+            Debug.Log("Time until next spawn: " + curve.Evaluate(Time.timeSinceLevelLoad));
+            yield return new WaitForSeconds(curve.Evaluate(Time.timeSinceLevelLoad));
         }
     }
 
