@@ -79,6 +79,10 @@ public class StatUpgradeMenu : MonoBehaviour
         loadingPanel.StopLoading();
         int placement = 1;
         rankingsTab.SetActive(true);
+        
+        foreach(Transform child in rankingList.transform)
+            Destroy(child.gameObject);
+
         foreach(HighScore highScore in rankings.highScores)
         {
             HighScoreItemUI currentItem = Instantiate(rankingItemPrefab, rankingList.transform).GetComponent<HighScoreItemUI>();

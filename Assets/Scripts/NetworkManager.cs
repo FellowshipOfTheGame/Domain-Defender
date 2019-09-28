@@ -85,11 +85,11 @@ public class NetworkManager : MonoBehaviour
 
     public void AttemptSignup(string username, string password, string email, OnObjectReturn<Token> callback, OnError errorCallback)
     {
-        string uri = "/login";
+        string uri = "/register";
         WWWForm form = new WWWForm();
         form.AddField("username", username);
         form.AddField("password", password);
-        //form.AddField("email", email);
+        form.AddField("email", email);
 
         StartCoroutine(PostRequest(uri, form, callback, errorCallback));
     }
