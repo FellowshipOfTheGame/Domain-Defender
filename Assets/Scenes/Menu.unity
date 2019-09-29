@@ -11698,8 +11698,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Programa\xE7\xE3o: \n\tAbner Santos\n\tHenrique Camillo\n\nServidor/Backend:\n\tLui
     Rocha\n\nArte:\n\tWilian Leodegario (Bin\xE1rio)\n\tGabriel Nascimento (Cartaz)\n\nM\xFAsica:\n\tHenrique
-    Lecco\n\nL\xEDder de Projeto/SFX:\n\tEleazar Braga\n\nProduct Owner (PO)\n\tDaniel
-    Fr\xF3es\n\n\t\n"
+    Lecco\n\nL\xEDder de Projeto/SFX:\n\tEleazar Braga (Sortudo)\n\nProduct Owner
+    (PO)\n\tDaniel Fr\xF3es\n\n\t\n"
 --- !u!222 &1030338215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12776,7 +12776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1122788835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16493,7 +16493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -298, y: 3.3499146}
+  m_AnchoredPosition: {x: -298, y: 3.3498535}
   m_SizeDelta: {x: 201.29, y: 201.29999}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1422491338
@@ -22536,7 +22536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -133.00002, y: 36.699997}
+  m_AnchoredPosition: {x: -133.00002, y: 36.69995}
   m_SizeDelta: {x: 120.1, y: 120.099976}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2126493691
