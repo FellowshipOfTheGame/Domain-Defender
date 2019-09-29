@@ -14,6 +14,7 @@ public class Hexagon : MonoBehaviour
     [SerializeField] GameObject scorePanel;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] PowerUps powerUps;
+    private bool shieldDestroying = false;
 
     [SerializeField] private AudioSource ShieldDown;
     
@@ -25,7 +26,11 @@ public class Hexagon : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (hasShield)
+            if (shieldDestroying)
+            {
+                Destroy(other.gameObject);
+            }
+            else if (hasShield)
             {
                 DeactivateShield();
                 Destroy(other.gameObject);
@@ -39,6 +44,8 @@ public class Hexagon : MonoBehaviour
 
         }
     }
+
+
 
     /// <summary>
     /// Activates shield
@@ -54,9 +61,16 @@ public class Hexagon : MonoBehaviour
     /// </summary>
     public void DeactivateShield()
     {
+        Invoke(nameof(NotInvincibleAnymore), 1f);
+        shieldDestroying = true;
         hasShield = false;
         ShieldDown.Play();
         AnimManager.instance.hexagon.SetShield(false);
+    }
+
+    void NotInvincibleAnymore()
+    {
+        shieldDestroying = false;
     }
 
     private void Reset()
