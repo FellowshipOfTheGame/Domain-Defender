@@ -18,6 +18,7 @@ public class NetworkManager : MonoBehaviour
 
     public static string baseUrl = "https://bixoquest.icmc.usp.br:443";
     public static string token = null;
+    private static string unity_token = "66B1132A0173910B01EE3A15EF4E69583BBF2F7F1E4462C99EFBE1B9AB5BF808";
 
     public delegate void OnStringAnswer(string data);
     public delegate void OnObjectReturn<T>(T stats);
@@ -29,7 +30,10 @@ public class NetworkManager : MonoBehaviour
         uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
+        {
             uwr.SetRequestHeader("authorization", token);
+            uwr.SetRequestHeader("unity_token", unity_token);
+        }
 
         yield return uwr.SendWebRequest();
 
@@ -54,7 +58,10 @@ public class NetworkManager : MonoBehaviour
         uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
+        {
             uwr.SetRequestHeader("authorization", token);
+            uwr.SetRequestHeader("unity_token", unity_token);
+        }
 
         yield return uwr.SendWebRequest();
 

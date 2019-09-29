@@ -26,6 +26,7 @@ public class LoadingPanel : MonoBehaviour
     {
         errorButton.onClick = buttonEvent;
         errorButton.onClick.AddListener(() => this.gameObject.SetActive(false));
+        errorButton.onClick.AddListener(() => this.errorMessage.text = "");
         this.buttonText.text = buttonText;
         ShowError(message, errorMessage);
     }
