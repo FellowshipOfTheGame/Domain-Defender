@@ -65,6 +65,7 @@ public class Hexagon : MonoBehaviour
         int score = ScoreBoard.instance.Score;
         int coins = ScoreBoard.instance.Coins;
         bool noUpgradeCheat = powerUps.CheckUpgrades();
+        Pause.instance.CanChangeState = false;
 
         if (noUpgradeCheat)
         {

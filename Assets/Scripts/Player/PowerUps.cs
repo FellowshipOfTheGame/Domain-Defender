@@ -49,6 +49,7 @@ public class PowerUps : MonoBehaviour
 
         Time.timeScale = 0;
         loadingPanel.StartLoading("Carregando...");
+        Pause.instance.CanChangeState = false;
         StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
         
     }
@@ -89,6 +90,8 @@ public class PowerUps : MonoBehaviour
      
         loadingPanel.StopLoading();
         Time.timeScale = 1;
+
+        Pause.instance.CanChangeState = true;
     }
 
 

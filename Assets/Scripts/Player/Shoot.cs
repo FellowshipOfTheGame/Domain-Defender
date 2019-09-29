@@ -21,8 +21,12 @@ public class Shoot : MonoBehaviour
     public bool drillPowerUp = false;
 
     public int type;
-    private bool canAttack = true;
+    private bool canAttack = false;
 
+    public void CanShoot(bool state)
+    {
+        canAttack = state;
+    }
 
     /// <summary>
     /// Checks if the attack button is pressed and attacks if it can attack
@@ -65,7 +69,9 @@ public class Shoot : MonoBehaviour
 
         // Waits "cooldown" seconds to enable player to shoot again 
         yield return new WaitForSecondsRealtime(cooldown);
-        canAttack = true;
+
+        if (!Pause.instance.paused)
+            canAttack = true;
     }
 
     Vector3[] GenerateSpawns(int numberOfProjectiles)

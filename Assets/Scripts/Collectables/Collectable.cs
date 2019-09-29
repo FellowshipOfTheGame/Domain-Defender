@@ -15,7 +15,7 @@ public abstract class Collectable : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (moving)
+        if (moving && !Pause.instance.paused)
             this.transform.position = Vector3.MoveTowards(this.transform.position, center, speed);
     }
 
