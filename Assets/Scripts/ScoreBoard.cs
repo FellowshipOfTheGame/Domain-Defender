@@ -11,8 +11,8 @@ public class ScoreBoard : MonoBehaviour
 	[Tooltip("Text displayed on screen")]
 	[SerializeField] private TextMeshProUGUI scoreText;
 	[SerializeField] private TextMeshProUGUI coinsText;
-	private int score = 0;
-	public int coins = 0;
+	[SerializeField] int score = 0;
+	[SerializeField] int coins = 0;
 	private int scoreUi;
 	private int coinsUi;
 	private int scoreTextMeshPro;
@@ -26,7 +26,7 @@ public class ScoreBoard : MonoBehaviour
 		{
 			// Debug.Log("Score1: " + scoreUi);
 			// Debug.Log("Score2: " + (score/highScore + 17) * scoreTextMeshPro);
-			if (scoreUi != (score/highScore + 17) * scoreTextMeshPro)
+			if (scoreUi != ((score + 1087)/highScore + 17) * scoreTextMeshPro)
 			{
 				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
 				return -1;
@@ -34,14 +34,20 @@ public class ScoreBoard : MonoBehaviour
 			else
 				return score; 
 		} 
-		private set 
+		set 
 		{
-			score = value;
-			scoreTextMeshPro = (score % 3) + 1;
-			highScore = Random.Range(1, 14);
-			scoreUi = (score/highScore + 17) * scoreTextMeshPro;
-
-			scoreText.text = "Score: " + score.ToString();
+			if (value > 0 && scoreUi != ((score + 1087)/highScore + 17) * scoreTextMeshPro)
+			{
+				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
+			}
+			else 
+			{
+				score = value;
+				scoreTextMeshPro = (score % 3) + 1;
+				highScore = Random.Range(1, 14);
+				scoreUi = ((score + 1087)/highScore + 17) * scoreTextMeshPro;
+				scoreText.text = "Pontos: " + score.ToString();
+			}
 		}
 	}
 
@@ -51,7 +57,7 @@ public class ScoreBoard : MonoBehaviour
 		{ 
 			// Debug.Log("Coins1: " + coinsUi);
 			// Debug.Log("Coins2: " + (coins/maxCoins + 17) * coinsTextMeshPro);
-			if (coinsUi != (coins/maxCoins + 17) * coinsTextMeshPro)
+			if (coinsUi != ((coins + 1087)/maxCoins + 17) * coinsTextMeshPro)
 			{
 				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
 				return -1;
@@ -61,12 +67,19 @@ public class ScoreBoard : MonoBehaviour
 		}
 		set
 		{
-			coins = value;
-			coinsTextMeshPro = (coins % 3) + 1;
-			maxCoins = Random.Range(1, 14);
-			coinsUi = (coins/maxCoins + 17) * coinsTextMeshPro;
+			if (value > 0 && coinsUi != ((coins + 1087)/maxCoins + 17) * coinsTextMeshPro)
+			{
+				Debug.Log("ORA ORA, HACKER, AGORA VOU TRATAR DE TI!");
+			}
+			else
+			{
+				coins = value;
+				coinsTextMeshPro = (coins % 3) + 1;
+				maxCoins = Random.Range(1, 14);
+				coinsUi = ((coins + 1087)/maxCoins + 17) * coinsTextMeshPro;
+				coinsText.text = "Moedas: " + coins.ToString();
+			}
 
-			coinsText.text = "Coins: " + coins.ToString();
 		}
 	}
 
@@ -81,8 +94,8 @@ public class ScoreBoard : MonoBehaviour
 		else if (instance != this)
 			Destroy(this.gameObject);
 
-		scoreText.text = "Score: " + score.ToString();
-		coinsText.text = "Coins: " + coins.ToString();
+		scoreText.text = "Pontos: " + score.ToString();
+		coinsText.text = "Moedas: " + coins.ToString();
 		Score = 0;
 		Coins = 0;
 	}
@@ -90,11 +103,11 @@ public class ScoreBoard : MonoBehaviour
 	/// <summary>
 	/// Updates score
 	/// </summary>
-	public void OnEnemyDeath ()
-	{
-		Score++;
+	// public void OnEnemyDeath ()
+	// {
+	// 	Score++;
 
-		// if (score % 10 == 0)
-		// 	Spawner.instance.LevelUp();
-	}
+	// 	// if (score % 10 == 0)
+	// 	// 	Spawner.instance.LevelUp();
+	// }
 }

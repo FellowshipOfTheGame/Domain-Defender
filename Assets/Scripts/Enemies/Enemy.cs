@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;
 
     private Collider2D col;
-    int baseLife;
+    [SerializeField] int baseLife;
 
     EnemyAnimHandle anim;
 
@@ -60,23 +60,27 @@ public class Enemy : MonoBehaviour
         // Checks if the enemy died after setting the new life value
         set
         {
-            life = value;
-
-            // If the enemy died, tries to split and 
-            if (life <= 0)
+            if (life > 0)
             {
-                if (split)
+                life = value;
+
+                // If the enemy died, tries to split and 
+                if (life <= 0)
                 {
-                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(SplitSound);
-                    StartCoroutine(Split());
-                }
-                else
-                {
-                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
-                    Die();
+                    if (split)
+                    {
+                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(SplitSound);
+                        StartCoroutine(Split());
+                    }
+                    else
+                    {
+                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
+                        Die();
+                    }
+
+                    ScoreBoard.instance.Score += (int)Mathf.Ceil(baseLife * 0.1f);
                 }
 
-                ScoreBoard.instance.OnEnemyDeath();
             }
         }
     }
@@ -196,7 +200,10 @@ public class Enemy : MonoBehaviour
         GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
         Enemy enemy = instance.GetComponent<Enemy>();
         enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-        enemy.Life = baseLife;
+        if (trojanHorse)
+            enemy.BaseLife = baseLife / 3;
+        else 
+            enemy.BaseLife = baseLife / 2;
 
         // Instantiates a enemy right
         newEnemyLane = Mod(lane - 1, 6);
@@ -205,7 +212,10 @@ public class Enemy : MonoBehaviour
         instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
         enemy = instance.GetComponent<Enemy>();
         enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-        enemy.Life = baseLife;
+        if (trojanHorse)
+            enemy.BaseLife = baseLife / 3;
+        else 
+            enemy.BaseLife = baseLife / 2;
 
         if (trojanHorse)
         {
@@ -218,7 +228,7 @@ public class Enemy : MonoBehaviour
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             enemy = instance.GetComponent<Enemy>();
             enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-            enemy.Life = baseLife;
+            enemy.BaseLife = baseLife / 3;
 
             // Instantiates a enemy two lanes right
             newEnemyLane = Mod(lane - 2, 6);
@@ -227,7 +237,7 @@ public class Enemy : MonoBehaviour
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             enemy = instance.GetComponent<Enemy>();
             enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-            enemy.Life = baseLife;
+            enemy.BaseLife = baseLife / 3;
         }
 
 

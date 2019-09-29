@@ -23,7 +23,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
 			if (value <= 0)
 			{
-				ScoreBoard.instance.OnEnemyDeath();
+				// ScoreBoard.instance.OnEnemyDeath();
 				Destroy(this.gameObject);
 			}
 		}

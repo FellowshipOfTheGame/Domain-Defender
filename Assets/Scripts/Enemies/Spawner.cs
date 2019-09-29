@@ -84,7 +84,7 @@ public class Spawner : MonoBehaviour
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             enemyScript.Lane = spawnIndex;
             enemyScript.BaseLife = (int)(dps * enemyLifeCurve.Evaluate(Time.timeSinceLevelLoad));
-            Debug.Log("Enemy life: " + enemyScript.Life);
+            // Debug.Log("Enemy life: " + enemyScript.Life);
 
             // if splittable
             if (enemyIndex == 1)
@@ -98,8 +98,8 @@ public class Spawner : MonoBehaviour
             Count(enemyIndex);
 
             // yield return new WaitForSeconds(timeBetweenSpawns);
-            Debug.Log("Current time: " + Time.timeSinceLevelLoad);
-            Debug.Log("Time until next spawn: " + curve.Evaluate(Time.timeSinceLevelLoad));
+            // Debug.Log("Current time: " + Time.timeSinceLevelLoad);
+            // Debug.Log("Time until next spawn: " + curve.Evaluate(Time.timeSinceLevelLoad));
             yield return new WaitForSeconds(curve.Evaluate(Time.timeSinceLevelLoad));
         }
     }

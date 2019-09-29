@@ -23,7 +23,7 @@ public class PowerUps : MonoBehaviour
     public PlayerStats playerStats;
     public int upgradesLevel;
     public float dps;
-
+    public bool noCheats = true;
     [SerializeField] private LoadingPanel loadingPanel;
 
 
@@ -49,6 +49,7 @@ public class PowerUps : MonoBehaviour
 
         Time.timeScale = 0;
         loadingPanel.StartLoading("Carregando...");
+        Pause.instance.CanChangeState = false;
         StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
         
     }
@@ -89,6 +90,10 @@ public class PowerUps : MonoBehaviour
      
         loadingPanel.StopLoading();
         Time.timeScale = 1;
+
+        Pause.instance.CanChangeState = true;
+
+        InvokeRepeating(nameof(InGameUpgradeCheck), 0f, 20f);
     }
 
 
@@ -167,6 +172,13 @@ public class PowerUps : MonoBehaviour
 
         for (int i = 0; i < playerStats.upgradeLevel.Length; i++)
             upgradesLevel += playerStats.upgradeLevel[i];
+    }
+
+    private void InGameUpgradeCheck()
+    {
+        if (noCheats)
+            noCheats = CheckUpgrades();
+        Debug.Log("Cheats until now: " + !noCheats);
     }
 
     /// <summary>

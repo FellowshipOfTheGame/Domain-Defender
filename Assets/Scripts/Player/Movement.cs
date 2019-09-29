@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
         if (Vector2.Distance(mousePosition, Input.mousePosition) < 10)
         {
             clickPress = mousePosition;
-            Debug.Log("Updated ClickPress");
+            // Debug.Log("Updated ClickPress");
         }
         
     }
