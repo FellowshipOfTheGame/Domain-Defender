@@ -67,7 +67,7 @@ public class Hexagon : MonoBehaviour
         bool noUpgradeCheat = powerUps.CheckUpgrades();
         Pause.instance.CanChangeState = false;
 
-        if (noUpgradeCheat)
+        if (noUpgradeCheat && powerUps.noCheats)
         {
             // If everything is ok
             if (score != -1  && coins != -1)
