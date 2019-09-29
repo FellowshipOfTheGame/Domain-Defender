@@ -11,6 +11,7 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] LoadingPanel loadingPanel;
     [SerializeField] GameObject rankingsTab, rankingList;
     [SerializeField] GameObject rankingItemPrefab;
+    [SerializeField] GameObject textoMoedasUpgrade;
 
     private void Awake()
     {
@@ -129,6 +130,7 @@ public class StatUpgradeMenu : MonoBehaviour
 
             if(level+1 < selectedStat.value.Length && level < selectedStat.cost.Length)
             {
+                textoMoedasUpgrade.gameObject.SetActive(true);
                 uiReferences.cost.text = selectedStat.cost[level].ToString();
                 uiReferences.nextValue.text = selectedStat.value[level+1].ToString();
                 if(playerStats.money < selectedStat.cost[level])
@@ -141,8 +143,8 @@ public class StatUpgradeMenu : MonoBehaviour
                 uiReferences.nextValue.text = "MAX";
                 uiReferences.upgradeButton.enabled = false;
                 uiReferences.cost.text = "MAX";
+                textoMoedasUpgrade.gameObject.SetActive(false);
             }
-
         }
     }
 }
