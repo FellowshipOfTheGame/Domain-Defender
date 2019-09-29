@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class Hexagon : MonoBehaviour
@@ -10,6 +11,8 @@ public class Hexagon : MonoBehaviour
     private bool hasShield;
     [SerializeField] GameObject shield;
     [SerializeField] LoadingPanel loadingPanel;
+    [SerializeField] GameObject scorePanel;
+    [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] PowerUps powerUps;
 
     [SerializeField] private AudioSource ShieldDown;
@@ -78,18 +81,18 @@ public class Hexagon : MonoBehaviour
 
                     Time.timeScale = 0;
                     loadingPanel.StartLoading("Carregando...");
-                    StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+                    StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, ShowScore, SubmitScoreError));
                 }
                 else
-                    GoToUpgradesScene(null);
+                    GoToUpgradesScene();
             }
             else
-                GoToUpgradesScene(null);
+                GoToUpgradesScene();
         }
         else
         {
             Debug.Log("Upgrade cheat detected");
-            GoToUpgradesScene(null);
+            GoToUpgradesScene();
         }
     }
 
@@ -103,7 +106,14 @@ public class Hexagon : MonoBehaviour
         loadingPanel.ShowError("Ops! Ocorreu um erro!", errorMessage, "Voltar", backToMenu);
     }
 
-    private void GoToUpgradesScene(PlayerStats player)
+    private void ShowScore(PlayerStats player)
+    {
+        loadingPanel.StopLoading();
+        scorePanel.SetActive(true);
+        scoreText.text = "Pontuação:\n" + ScoreBoard.instance.Score.ToString();
+    }
+
+    public void GoToUpgradesScene()
     {
         Time.timeScale = 1;
         GameManager.instance.BackToMenu();
