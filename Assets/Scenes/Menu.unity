@@ -2137,7 +2137,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Password
+  m_Text: Senha
 --- !u!222 &147363724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3847,8 +3847,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -84, y: 562.99994}
-  m_SizeDelta: {x: 534.3, y: 97.9}
+  m_AnchoredPosition: {x: -19, y: 562.99994}
+  m_SizeDelta: {x: 664.2, y: 97.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291404322
 MonoBehaviour:
@@ -3883,7 +3883,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select Your
+  m_Text: Selecione sua
 --- !u!222 &291404323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6753,7 +6753,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Username
+  m_Text: "Usu\xE1rio"
 --- !u!222 &548329112
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8829,7 +8829,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ship
+  m_Text: Nave
 --- !u!222 &745573349
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9431,7 +9431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Username
+  m_Text: "Usu\xE1rio"
 --- !u!222 &799000205
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13341,7 +13341,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Password
+  m_Text: Senha
 --- !u!222 &1165042078
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15255,7 +15255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CANCEL
+  m_Text: VOLTAR
 --- !u!222 &1324337851
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19323,7 +19323,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Confirm Password
+  m_Text: Confirmar Senha
 --- !u!222 &1718787790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21630,7 +21630,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CANCEL
+  m_Text: VOLTAR
 --- !u!222 &2042678036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22536,7 +22536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -133.00002, y: 36.7}
+  m_AnchoredPosition: {x: -133.00002, y: 36.699997}
   m_SizeDelta: {x: 120.1, y: 120.099976}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2126493691
