@@ -60,23 +60,27 @@ public class Enemy : MonoBehaviour
         // Checks if the enemy died after setting the new life value
         set
         {
-            life = value;
-
-            // If the enemy died, tries to split and 
-            if (life <= 0)
+            if (life > 0)
             {
-                if (split)
+                life = value;
+
+                // If the enemy died, tries to split and 
+                if (life <= 0)
                 {
-                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(SplitSound);
-                    StartCoroutine(Split());
-                }
-                else
-                {
-                    GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
-                    Die();
+                    if (split)
+                    {
+                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(SplitSound);
+                        StartCoroutine(Split());
+                    }
+                    else
+                    {
+                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
+                        Die();
+                    }
+
+                    ScoreBoard.instance.Score += (int)Mathf.Ceil(baseLife * 0.1f);
                 }
 
-                ScoreBoard.instance.OnEnemyDeath();
             }
         }
     }

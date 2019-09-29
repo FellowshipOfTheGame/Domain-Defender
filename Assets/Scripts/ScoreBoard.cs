@@ -34,7 +34,7 @@ public class ScoreBoard : MonoBehaviour
 			else
 				return score; 
 		} 
-		private set 
+		set 
 		{
 			if (value > 0 && scoreUi != ((score + 1087)/highScore + 17) * scoreTextMeshPro)
 			{
@@ -103,11 +103,11 @@ public class ScoreBoard : MonoBehaviour
 	/// <summary>
 	/// Updates score
 	/// </summary>
-	public void OnEnemyDeath ()
-	{
-		Score++;
+	// public void OnEnemyDeath ()
+	// {
+	// 	Score++;
 
-		// if (score % 10 == 0)
-		// 	Spawner.instance.LevelUp();
-	}
+	// 	// if (score % 10 == 0)
+	// 	// 	Spawner.instance.LevelUp();
+	// }
 }
