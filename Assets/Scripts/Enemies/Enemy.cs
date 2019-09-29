@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;
 
     private Collider2D col;
-    int baseLife;
+    [SerializeField] int baseLife;
 
     EnemyAnimHandle anim;
 
@@ -200,7 +200,10 @@ public class Enemy : MonoBehaviour
         GameObject instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
         Enemy enemy = instance.GetComponent<Enemy>();
         enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-        enemy.Life = baseLife;
+        if (trojanHorse)
+            enemy.BaseLife = baseLife / 3;
+        else 
+            enemy.BaseLife = baseLife / 2;
 
         // Instantiates a enemy right
         newEnemyLane = Mod(lane - 1, 6);
@@ -209,7 +212,10 @@ public class Enemy : MonoBehaviour
         instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
         enemy = instance.GetComponent<Enemy>();
         enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-        enemy.Life = baseLife;
+        if (trojanHorse)
+            enemy.BaseLife = baseLife / 3;
+        else 
+            enemy.BaseLife = baseLife / 2;
 
         if (trojanHorse)
         {
@@ -222,7 +228,7 @@ public class Enemy : MonoBehaviour
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             enemy = instance.GetComponent<Enemy>();
             enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-            enemy.Life = baseLife;
+            enemy.BaseLife = baseLife / 3;
 
             // Instantiates a enemy two lanes right
             newEnemyLane = Mod(lane - 2, 6);
@@ -231,7 +237,7 @@ public class Enemy : MonoBehaviour
             instance = Instantiate(splitResultEnemy, this.transform.position, this.transform.rotation);
             enemy = instance.GetComponent<Enemy>();
             enemy.MoveToLane(this.lane, newEnemyLane, newEnemySpawn);
-            enemy.Life = baseLife;
+            enemy.BaseLife = baseLife / 3;
         }
 
 
