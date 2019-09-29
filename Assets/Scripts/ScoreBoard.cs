@@ -41,7 +41,7 @@ public class ScoreBoard : MonoBehaviour
 			highScore = Random.Range(1, 14);
 			scoreUi = (score/highScore + 17) * scoreTextMeshPro;
 
-			scoreText.text = "Score: " + score.ToString();
+			scoreText.text = "Pontos: " + score.ToString();
 		}
 	}
 
@@ -66,7 +66,7 @@ public class ScoreBoard : MonoBehaviour
 			maxCoins = Random.Range(1, 14);
 			coinsUi = (coins/maxCoins + 17) * coinsTextMeshPro;
 
-			coinsText.text = "Coins: " + coins.ToString();
+			coinsText.text = "Moedas: " + coins.ToString();
 		}
 	}
 
@@ -81,8 +81,8 @@ public class ScoreBoard : MonoBehaviour
 		else if (instance != this)
 			Destroy(this.gameObject);
 
-		scoreText.text = "Score: " + score.ToString();
-		coinsText.text = "Coins: " + coins.ToString();
+		scoreText.text = "Pontos: " + score.ToString();
+		coinsText.text = "Moedas: " + coins.ToString();
 		Score = 0;
 		Coins = 0;
 	}
