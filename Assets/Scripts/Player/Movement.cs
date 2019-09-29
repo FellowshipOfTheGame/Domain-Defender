@@ -14,14 +14,14 @@ public class Movement : MonoBehaviour
     // The object will rotate so that it has 6 positions (360/6 = 60)
     private int rotationAngle = 60;
     private float newAngle;
-    private Vector3 clickPress, clickRelease;
+    private Vector3 clickPress, clickRelease, mousePosition;
     private bool rotating = false;
     private bool canRotate = true;
 
     private bool preparing = false;
 
     private int lane = 0;
-
+    [SerializeField] float updateRate;
     public int Lane
     {
         get { return lane; }
@@ -76,11 +76,24 @@ public class Movement : MonoBehaviour
         preparing = false;
     }
 
+    IEnumerator Check(Vector3 mousePosition)
+    {
+        yield return new WaitForSeconds(updateRate);
+        if (Vector2.Distance(mousePosition, Input.mousePosition) < 10)
+        {
+            clickPress = mousePosition;
+            Debug.Log("Updated ClickPress");
+        }
+        
+    }
+
     /// <summary>
     /// Gets the input from keyboard and set flags to rotate it
     /// </summary>
     private void Update()
     {
+        StartCoroutine(Check(Input.mousePosition));
+
         if (canRotate)
         {
             // Keyboard Input
