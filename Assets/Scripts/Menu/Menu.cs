@@ -9,6 +9,9 @@ public class Menu : MonoBehaviour {
 	[SerializeField] InputField loginUsername, loginPassword;
 	[SerializeField] InputField signupUsername, signupPassword, signupConfirm, signupEmail;
 	[SerializeField] TextMeshProUGUI errorMessage;
+	[SerializeField] Toggle rememberMe;
+
+	public bool saveLogin = false;
 	public bool login = true;
 	public GameObject loginTab, signupTab, mainTab, logoutButton, shipTab, statsTab, loadingPanel;
 
@@ -18,8 +21,16 @@ public class Menu : MonoBehaviour {
 		Initialize();
 	}
 	
-	public void Initialize(){
+	public void Initialize()
+	{
+		if(PlayerPrefs.HasKey("Login"))
+		{
+			login = true;
+			NetworkManager.token = PlayerPrefs.GetString("Login");
+		}
+
 		logoutButton.SetActive(login);
+
 		if(GameManager.backFromGameScene)
 		{
 			mainTab.SetActive(true);
@@ -32,6 +43,8 @@ public class Menu : MonoBehaviour {
 	public void Logout(){
 		login = false;
 		NetworkManager.token = null;
+		PlayerPrefs.DeleteKey("Login");
+		PlayerPrefs.Save();
 		logoutButton.SetActive(false);
 	}
 
@@ -81,6 +94,12 @@ public class Menu : MonoBehaviour {
 
 	public void FinishLogin(Token token)
 	{
+		if(rememberMe.gameObject.activeInHierarchy && rememberMe.isOn)
+		{
+			PlayerPrefs.SetString("Login", token.token);
+			PlayerPrefs.Save();
+		}
+		
 		loadingPanel.SetActive(false);
 		errorMessage.text = "";
 		NetworkManager.token = token.token;
