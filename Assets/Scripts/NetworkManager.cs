@@ -30,10 +30,9 @@ public class NetworkManager : MonoBehaviour
         uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
-        {
             uwr.SetRequestHeader("authorization", token);
-            uwr.SetRequestHeader("unity_token", unity_token);
-        }
+
+        uwr.SetRequestHeader("unity_token", unity_token);
 
         yield return uwr.SendWebRequest();
 
@@ -58,10 +57,9 @@ public class NetworkManager : MonoBehaviour
         uwr.timeout = NetworkManager.instance.timeout;
 
         if(token != null)
-        {
             uwr.SetRequestHeader("authorization", token);
-            uwr.SetRequestHeader("unity_token", unity_token);
-        }
+
+        uwr.SetRequestHeader("unity_token", unity_token);
 
         yield return uwr.SendWebRequest();
 

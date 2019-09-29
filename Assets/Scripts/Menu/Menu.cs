@@ -64,6 +64,7 @@ public class Menu : MonoBehaviour {
 			ShowLoginError("Insira uma senha");
 		else
 		{
+			errorMessage.text = "";
 			loadingPanel.SetActive(true);
 			NetworkManager.instance.AttemptLogin(loginUsername.text, loginPassword.text, FinishLogin, ShowLoginError);
 		}
@@ -81,6 +82,7 @@ public class Menu : MonoBehaviour {
 			ShowLoginError("Suas senhas não são iguais");
 		else
 		{
+			errorMessage.text = "";
 			loadingPanel.SetActive(true);
 			NetworkManager.instance.AttemptSignup(signupUsername.text, signupPassword.text, signupEmail.text, FinishLogin, ShowLoginError);
 		}
@@ -99,7 +101,7 @@ public class Menu : MonoBehaviour {
 			PlayerPrefs.SetString("Login", token.token);
 			PlayerPrefs.Save();
 		}
-		
+
 		loadingPanel.SetActive(false);
 		errorMessage.text = "";
 		NetworkManager.token = token.token;
