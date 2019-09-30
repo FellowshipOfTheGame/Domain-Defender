@@ -664,6 +664,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4455837928469148791, guid: 1336afeda6f966940979a643cb434e09,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.076
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1336afeda6f966940979a643cb434e09, type: 3}
 --- !u!82 &268866764 stripped
@@ -2298,6 +2303,11 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1795835229}
+    - target: {fileID: 8299707280907666212, guid: 811c283ae443bb2438c9eba6bbda80a8,
+        type: 3}
+      propertyPath: DieSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 62e0cecee0964af4788004c47090938c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 811c283ae443bb2438c9eba6bbda80a8, type: 3}
 --- !u!1 &1119084076

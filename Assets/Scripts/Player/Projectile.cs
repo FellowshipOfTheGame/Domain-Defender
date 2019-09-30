@@ -55,6 +55,6 @@ public class Projectile : MonoBehaviour
 
     public void Awake()
     {
-        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(Pew);
+        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(Pew, 0.1f);
     }
 }
