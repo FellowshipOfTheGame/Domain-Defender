@@ -153,4 +153,10 @@ public class Hexagon : MonoBehaviour
         Time.timeScale = 1;
         GameManager.instance.BackToMenu();
     }
+
+    public void GoToUpgradesScene()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.BackToMenu();
+    }
 }
