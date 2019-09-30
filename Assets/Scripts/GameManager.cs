@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool backFromGameScene = false;
     private AudioSource audioSource;
     [SerializeField] AudioClip[] clips;
+    public bool muted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +39,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("ORecomecoComArte");
         audioSource.clip = clips[1];
         audioSource.Play();
+    }
+
+    public void ChangeSoundState(bool muted)
+    {
+        this.muted = muted;
+
+        if (muted)
+            AudioListener.volume = 0f;
+        else
+            AudioListener.volume = 1f;
     }
 }
