@@ -17,6 +17,7 @@ public class Hexagon : MonoBehaviour
     private bool shieldDestroying = false;
 
     [SerializeField] private AudioSource ShieldDown;
+    [SerializeField] private AudioClip DieSound;
     
     /// <summary>
     /// Detects game over condition (if an enemy hits the hexagon)
@@ -38,6 +39,7 @@ public class Hexagon : MonoBehaviour
             else
             {
                 //SceneManager.LoadScene(0);
+                GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
                 AnimManager.instance.GameOver();
                 Invoke("Reset", 1.3f);
             }

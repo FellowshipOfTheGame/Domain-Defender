@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
                     }
                     else
                     {
-                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
+                        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound, 0.1f);
                         Die();
                     }
 
