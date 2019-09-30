@@ -89,6 +89,8 @@ public class Hexagon : MonoBehaviour
         bool noUpgradeCheat = powerUps.CheckUpgrades();
         Pause.instance.CanChangeState = false;
 
+        Debug.Log(noUpgradeCheat + " && " + powerUps.noCheats);
+
         if (noUpgradeCheat && powerUps.noCheats)
         {
             // If everything is ok
@@ -114,6 +116,8 @@ public class Hexagon : MonoBehaviour
             }
             else
             {
+                Debug.Log("SENDING HACK TO SERVER");
+    
                 WWWForm form = new WWWForm();
                 form.AddField("hacks", 1);
                 
@@ -124,6 +128,7 @@ public class Hexagon : MonoBehaviour
         }
         else
         {
+            Debug.Log("SENDING HACK TO SERVER");
             WWWForm form = new WWWForm();
             form.AddField("hacks", 1);
 
