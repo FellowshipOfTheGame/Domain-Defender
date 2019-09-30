@@ -105,15 +105,29 @@ public class Hexagon : MonoBehaviour
                     StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, ShowScore, SubmitScoreError));
                 }
                 else
-                    GoToUpgradesScene();
+                {
+                    loadingPanel.StartLoading("Carregando...");
+                    ShowScore(null);
+                }
             }
             else
-                GoToUpgradesScene();
+            {
+                WWWForm form = new WWWForm();
+                form.AddField("hacks", 1);
+                
+                Time.timeScale = 0;
+                loadingPanel.StartLoading("Carregando...");
+                StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+            }
         }
         else
         {
-            Debug.Log("Upgrade cheat detected");
-            GoToUpgradesScene();
+            WWWForm form = new WWWForm();
+            form.AddField("hacks", 1);
+
+            Time.timeScale = 0;
+            loadingPanel.StartLoading("Carregando...");
+            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
         }
     }
 
@@ -134,7 +148,7 @@ public class Hexagon : MonoBehaviour
         scoreText.text = "Pontuação:\n" + ScoreBoard.instance.Score.ToString();
     }
 
-    public void GoToUpgradesScene()
+    public void GoToUpgradesScene(PlayerStats player)
     {
         Time.timeScale = 1;
         GameManager.instance.BackToMenu();
