@@ -79,7 +79,7 @@ public class Movement : MonoBehaviour
     IEnumerator Check(Vector3 mousePosition)
     {
         yield return new WaitForSeconds(updateRate);
-        if (Vector2.Distance(mousePosition, Input.mousePosition) < 10)
+        if (Vector2.Distance(mousePosition, Camera.main.ScreenToViewportPoint(Input.mousePosition)) < 10)
         {
             clickPress = mousePosition;
             // Debug.Log("Updated ClickPress");
@@ -92,7 +92,7 @@ public class Movement : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        StartCoroutine(Check(Input.mousePosition));
+        StartCoroutine(Check(Camera.main.ScreenToViewportPoint(Input.mousePosition)));
 
         if (canRotate)
         {
@@ -108,7 +108,10 @@ public class Movement : MonoBehaviour
             {
                 // Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane);
                 // clickPress = Camera.main.ScreenToWorldPoint(mousePosition);
-                clickPress = Input.mousePosition;
+                StopAllCoroutines();
+                clickPress = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                mousePosition = clickPress;
+                
             }
 
             // Gets click release position, compare with press, and rotates if it's considered a swipe.
@@ -116,10 +119,10 @@ public class Movement : MonoBehaviour
             {
                 // Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane);
                 // clickRelease = Camera.main.ScreenToWorldPoint(mousePosition);
-                clickRelease = Input.mousePosition;
+                clickRelease = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-                float swipeDistance = (clickRelease.x - clickPress.x) * 50;
-                // Debug.Log(swipeDistance);
+                float swipeDistance = (clickRelease.x - clickPress.x);
+                Debug.Log(swipeDistance);
 
                 if (swipeDistance < -minSwipeDistance)
                     Rotate(-rotationAngle);

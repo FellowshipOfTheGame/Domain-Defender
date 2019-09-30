@@ -2590,7 +2590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f73d6d0bb552b34bba6b33b52650dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSwipeDistance: 2000
+  minSwipeDistance: 0.1
   speed: 0.18
   inputToleranceAngle: 5
   updateRate: 0.2
@@ -4730,6 +4730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 562293832}
   coinsText: {fileID: 2015540324}
+  score: 0
   coins: 0
 --- !u!61 &7366485604085276371
 BoxCollider2D:
@@ -4811,6 +4812,7 @@ MonoBehaviour:
     lastLogin: 0
   upgradesLevel: 0
   dps: 0
+  noCheats: 1
   loadingPanel: {fileID: 110833090}
 --- !u!114 &7414091922838344727
 MonoBehaviour:
