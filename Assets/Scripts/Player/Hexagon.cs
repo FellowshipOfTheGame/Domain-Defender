@@ -39,7 +39,7 @@ public class Hexagon : MonoBehaviour
             else
             {
                 //SceneManager.LoadScene(0);
-                GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
+                //GameManager.instance.GetComponent<AudioSource>().PlayOneShot(DieSound);
                 AnimManager.instance.GameOver();
                 Invoke("Reset", 1.3f);
             }
