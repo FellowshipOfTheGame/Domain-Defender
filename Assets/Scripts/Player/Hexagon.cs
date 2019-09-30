@@ -8,7 +8,7 @@ using TMPro;
 
 public class Hexagon : MonoBehaviour
 {
-    private bool hasShield;
+    [SerializeField] bool hasShield;
     [SerializeField] GameObject shield;
     [SerializeField] LoadingPanel loadingPanel;
     [SerializeField] GameObject scorePanel;
@@ -66,6 +66,12 @@ public class Hexagon : MonoBehaviour
         hasShield = false;
         ShieldDown.Play();
         AnimManager.instance.hexagon.SetShield(false);
+    }
+
+    public void FadeOut()
+    {
+        hasShield = false;
+        AnimManager.instance.hexagon.FadeOut();
     }
 
     void NotInvincibleAnymore()

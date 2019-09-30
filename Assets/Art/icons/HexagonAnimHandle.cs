@@ -19,6 +19,12 @@ public class HexagonAnimHandle : MonoBehaviour {
         shield.SetBool("on", active);
     }
 
+    public void FadeOut()
+    {
+        shield.Play("shield_fade_out");
+        shield.SetBool("on", false);
+    }
+
     //final animation
     public void GameOver(){
         core.SetTrigger("die");

@@ -109,7 +109,7 @@ public class PowerUps : MonoBehaviour
 
     public void ResetShield()
     {
-        hexagon.DeactivateShield();
+        hexagon.FadeOut();
         CancelInvoke("ResetShield");
     }
 
