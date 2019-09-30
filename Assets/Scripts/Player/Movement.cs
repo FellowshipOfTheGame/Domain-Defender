@@ -122,7 +122,7 @@ public class Movement : MonoBehaviour
                 clickRelease = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
                 float swipeDistance = (clickRelease.x - clickPress.x);
-                Debug.Log(swipeDistance);
+                // Debug.Log(swipeDistance);
 
                 if (swipeDistance < -minSwipeDistance)
                     Rotate(-rotationAngle);
