@@ -234,6 +234,15 @@ public class PowerUps : MonoBehaviour
             return false;
         }
 
+        // Debug.Log("Cheats:");
+        // Debug.Log(Mathf.Abs(playerShoot.cooldown - baseCadence));
+        // Debug.Log(Mathf.Abs(playerShoot.cooldown - baseCadence/cadenceMultiplier));
+        if (Mathf.Abs(playerShoot.cooldown - baseCadence) > 0.001 && Mathf.Abs(playerShoot.cooldown - baseCadence/cadenceMultiplier) > 0.001)
+        {
+            Debug.Log("Upgrade Cheat: player shoot cooldown");
+            return false;
+        }
+        
         return true;
     }
 }
