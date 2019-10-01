@@ -11712,7 +11712,7 @@ MonoBehaviour:
   m_Text: "Programa\xE7\xE3o: \n\tAbner Santos\n\tHenrique Camillo\n\nServidor/Backend:\n\tLui
     Rocha\n\nArte:\n\tWilian Leodegario (Bin\xE1rio)\n\tGabriel Nascimento (Cartaz)\n\nM\xFAsica:\n\tHenrique
     Lecco\n\nL\xEDder de Projeto/SFX:\n\tEleazar Braga (Sortudo)\n\nProduct Owner
-    (PO)\n\tDaniel Fr\xF3es\n\n\t\n"
+    (PO):\n\tDaniel Fr\xF3es\n\nVulnerabilidade Reportada:\n\tGanesh - Estevam\n\t\n\n\n\n\n\n"
 --- !u!222 &1030338215
 CanvasRenderer:
   m_ObjectHideFlags: 0
