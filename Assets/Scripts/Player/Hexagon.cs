@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Windows;
 using System.Text;
+using System.Security.Cryptography;
 
 
 public class Hexagon : MonoBehaviour
@@ -53,11 +53,13 @@ public class Hexagon : MonoBehaviour
     {
         byte[] bytes = Encoding.ASCII.GetBytes("oisemcomp" + ScoreBoard.instance.Score +
                                                              ScoreBoard.instance.Coins + powerUps.gamesPlayed);
-        byte[] hashb = Crypto.ComputeSHA1Hash(bytes);
+
+        SHA1 sha = new SHA1CryptoServiceProvider(); 
+        byte[] hashb = sha.ComputeHash(bytes);
 
         string hash = ByteArrayToString(hashb);
 
-        Debug.Log(hash);
+        Debug.Log("Hash = " + hash);
         return hash;
     }
 
