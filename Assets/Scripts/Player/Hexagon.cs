@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Windows;
+using System.Text;
 
 
 public class Hexagon : MonoBehaviour
@@ -47,6 +49,25 @@ public class Hexagon : MonoBehaviour
         }
     }
 
+    string Hash()
+    {
+        byte[] bytes = Encoding.ASCII.GetBytes("oisemcomp" + ScoreBoard.instance.Score +
+                                                             ScoreBoard.instance.Coins + powerUps.gamesPlayed);
+        byte[] hashb = Crypto.ComputeSHA1Hash(bytes);
+
+        string hash = ByteArrayToString(hashb);
+
+        Debug.Log(hash);
+        return hash;
+    }
+
+    public static string ByteArrayToString(byte[] ba)
+    {
+        StringBuilder hex = new StringBuilder(ba.Length * 2);
+        foreach (byte b in ba)
+            hex.AppendFormat("{0:x2}", b);
+        return hex.ToString();
+    }
 
 
     /// <summary>
@@ -101,6 +122,7 @@ public class Hexagon : MonoBehaviour
                     WWWForm form = new WWWForm();
                     form.AddField("score", score.ToString());
                     form.AddField("money", coins.ToString());
+                    form.AddField("hash", Hash());
                     // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
                     // ! Veja o script stat upgrade menu para exemplos.
 
