@@ -25,6 +25,7 @@ public class PowerUps : MonoBehaviour
     public float dps;
     public bool noCheats = true;
     [SerializeField] private LoadingPanel loadingPanel;
+    public int gamesPlayed;
 
 
     private enum Projectiles { normal = 0, drill = 1 };
@@ -75,6 +76,8 @@ public class PowerUps : MonoBehaviour
         shieldPowerUpDuration = StatUpgradeMenu.upgradeableStats[(int)StatType.Shield].value[playerStats[StatType.Shield]];
         numberOfHits = (int)StatUpgradeMenu.upgradeableStats[(int)StatType.PenetratingShots].value[playerStats[StatType.PenetratingShots]];
         damage = (int)StatUpgradeMenu.upgradeableStats[(int)StatType.Damage].value[playerStats[StatType.Damage]];
+
+        this.gamesPlayed = playerStats.gamesPlayed;
 
         ResetProjectile();
         ResetCadence();

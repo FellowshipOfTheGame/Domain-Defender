@@ -10,6 +10,7 @@ public class PlayerStats
     public int[] upgradeLevel;
     public int highScore;
     public int lastLogin;
+    public int gamesPlayed;
     
     public int this[StatType index]
     {
