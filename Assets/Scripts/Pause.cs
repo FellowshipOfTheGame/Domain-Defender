@@ -10,6 +10,12 @@ public class Pause : MonoBehaviour
     public bool paused = false;
     [SerializeField] Shoot player;
 
+    public delegate void PauseHandler();
+    public event PauseHandler OnPause;
+    public event PauseHandler OnResume;
+    public bool canShoot;
+
+
     public bool CanChangeState
     {
         get { return canChangeState; }
@@ -53,7 +59,8 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        player.CanShoot(false);
+        OnPause?.Invoke();
+        // player.CanShoot(false);
         paused = true;
         Time.timeScale = 0;
         pausePanel.SetActive(true);
@@ -61,7 +68,8 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
-        player.CanShoot(true);
+        OnResume?.Invoke();
+        // player.CanShoot(true);
         paused = false;
         Time.timeScale = 1;
         pausePanel.SetActive(false);

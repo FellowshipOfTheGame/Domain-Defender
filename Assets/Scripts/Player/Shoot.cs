@@ -28,12 +28,30 @@ public class Shoot : MonoBehaviour
         canAttack = state;
     }
 
+    void Start()
+    {
+        Pause.instance.OnPause += GamePause;
+        Pause.instance.OnResume += GameResume;
+    }
+    void GamePause()
+    {
+        Debug.Log("Resume: "+canAttack);
+        Pause.instance.canShoot = canAttack;
+        canAttack = false;
+    }
+
+    void GameResume()
+    {
+        canAttack = Pause.instance.canShoot;
+        Debug.Log("Resume: "+canAttack);
+    }
+
     /// <summary>
     /// Checks if the attack button is pressed and attacks if it can attack
     /// </summary>
     private void Update()
     {
-        if (canAttack && (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)))
+        if (canAttack)// && (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)))
         {
             StartCoroutine(Attack(GenerateSpawns(numberOfBullets)));
         }
@@ -68,7 +86,7 @@ public class Shoot : MonoBehaviour
         }
 
         // Waits "cooldown" seconds to enable player to shoot again 
-        yield return new WaitForSecondsRealtime(cooldown);
+        yield return new WaitForSeconds(cooldown);
 
         if (!Pause.instance.paused)
             canAttack = true;
