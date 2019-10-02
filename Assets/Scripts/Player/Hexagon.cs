@@ -122,11 +122,14 @@ public class Hexagon : MonoBehaviour
                 if (score != 0)
                 {
                     WWWForm form = new WWWForm();
+                    Upgrades upgrades = new Upgrades();
+                    upgrades.upgrades = StatUpgradeMenu.upgradeableStats;
+
                     form.AddField("score", score.ToString());
                     form.AddField("money", coins.ToString());
+                    form.AddField("upgrades", JsonUtility.ToJson(upgrades));
+                    form.AddField("levels", JsonUtility.ToJson(PowerUps.playerStats));
                     form.AddField("hash", Hash());
-                    // TODO: Tela de loading. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
-                    // ! Veja o script stat upgrade menu para exemplos.
 
                     Time.timeScale = 0;
                     loadingPanel.StartLoading("Carregando...");
@@ -165,7 +168,6 @@ public class Hexagon : MonoBehaviour
     private void SubmitScoreError(string errorMessage)
     {
         Debug.Log("Erro ao submeter score: " + errorMessage);
-        // TODO: Lidar com erro. Sugestão: usar classe LoadingPanel em um objeto de ui de painel.
 
         Button.ButtonClickedEvent backToMenu = new Button.ButtonClickedEvent();
         backToMenu.AddListener(() => GameManager.instance.BackToMenu());

@@ -20,7 +20,7 @@ public class PowerUps : MonoBehaviour
     [SerializeField] int numberOfBullets;
     [SerializeField] int numberOfHits;
     [SerializeField] int damage;
-    public PlayerStats playerStats;
+    public static PlayerStats playerStats;
     public int upgradesLevel;
     public float dps;
     public bool noCheats = true;
@@ -68,7 +68,7 @@ public class PowerUps : MonoBehaviour
 
     private void GetDataCallback(PlayerStats playerStats)
     {
-        this.playerStats = playerStats;
+        PowerUps.playerStats = playerStats;
 
         baseCadence = 1f / StatUpgradeMenu.upgradeableStats[(int)StatType.FireRate].value[playerStats[StatType.FireRate]];
         cadenceMultiplier = StatUpgradeMenu.upgradeableStats[(int)StatType.FireRateBoost].value[playerStats[StatType.FireRateBoost]];
