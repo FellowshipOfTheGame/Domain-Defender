@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class StatUpgradeMenu : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] GameObject rankingsTab, rankingList;
     [SerializeField] GameObject rankingItemPrefab;
     [SerializeField] GameObject textoMoedasUpgrade;
+    [SerializeField] Upgrades defaultUpgrades;
 
     private void Awake()
     {
@@ -45,8 +47,10 @@ public class StatUpgradeMenu : MonoBehaviour
     {
         currentTab = this.gameObject;
         loadingPanel.StartLoading("Carregando...");
-        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo, LoadError));
-        StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo, LoadError));
+        //StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", LoadPlayerInfo, LoadError));
+        LoadPlayerInfo();
+        //StartCoroutine(NetworkManager.GetRequest<Upgrades>("/upgrade", LoadUpgradeInfo, LoadError));
+        LoadUpgradeInfo();
     }
 
     private void LoadPlayerInfo(PlayerStats stats)
@@ -55,10 +59,39 @@ public class StatUpgradeMenu : MonoBehaviour
         UpdateUI();
     }
 
+    private void LoadPlayerInfo()
+    {
+        PlayerStats stats = new PlayerStats("",
+            PlayerPrefs.GetInt("Money"),
+            GetUpgradeLevel(),
+            PlayerPrefs.GetInt("Highscore"),
+            0, 0);
+        playerStats = stats;
+    }
+
+    private int[] GetUpgradeLevel()
+    {
+        int[] upgradeLevels = new int[6];
+        upgradeLevels[0] = PlayerPrefs.GetInt("FireRate");
+        upgradeLevels[1] = PlayerPrefs.GetInt("Damage");
+        upgradeLevels[2] = PlayerPrefs.GetInt("NumOfBullets");
+        upgradeLevels[3] = PlayerPrefs.GetInt("Shield");
+        upgradeLevels[4] = PlayerPrefs.GetInt("FireRateBoost");
+        upgradeLevels[5] = PlayerPrefs.GetInt("PenetratingShots");
+
+        return upgradeLevels;
+    }
+
     private void LoadUpgradeInfo(Upgrades upgrades)
     {
         upgradeableStats = upgrades.upgrades;
         Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected); 
+    }
+
+    private void LoadUpgradeInfo()
+    {
+        upgradeableStats = defaultUpgrades.upgrades;
+        Select(defaultSelected.GetComponent<SelectableStatUpgrade>().statType, defaultSelected);
     }
 
     private void LoadError(string errorMessage)

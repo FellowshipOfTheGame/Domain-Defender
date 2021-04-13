@@ -17,5 +17,15 @@ public class PlayerStats
         get => upgradeLevel[(int)index];
         set => upgradeLevel[(int)index] = value;
     }
+
+    public PlayerStats(string username, int money, int[] upgradeLevel, int highScore, int lastLogin, int gamesPlayed)
+    {
+        this.username = username;
+        this.money = money;
+        this.upgradeLevel = upgradeLevel;
+        this.highScore = highScore;
+        this.lastLogin = lastLogin;
+        this.gamesPlayed = gamesPlayed;
+    }
 }
 public enum StatType { FireRate, Damage, NumOfBullets, Shield, FireRateBoost, PenetratingShots }

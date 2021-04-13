@@ -56,6 +56,11 @@ public class Menu : MonoBehaviour {
 		}
 	}
 
+	public void StartGame()
+    {
+		mainTab.SetActive(true);
+	}
+
 	public void AttemptLogin()
 	{
 		if(loginUsername.text.Length == 0)
