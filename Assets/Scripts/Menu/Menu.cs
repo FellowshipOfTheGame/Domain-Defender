@@ -119,6 +119,7 @@ public class Menu : MonoBehaviour {
 
 	public void PlayGame()
 	{
+        statsTab.SetActive(false);
 		GameManager.instance.StartGame();
 	}
 }

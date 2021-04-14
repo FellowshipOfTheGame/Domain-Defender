@@ -69,6 +69,21 @@ public class StatUpgradeMenu : MonoBehaviour
         playerStats = stats;
     }
 
+    public void ResetPlayerInfo() {
+        PlayerStats stats = new PlayerStats("", 0, new int[6], 0, 0, 0);
+        playerStats = stats;
+
+        PlayerPrefs.SetInt("Highscore", 0);
+        PlayerPrefs.SetInt("Money", 0);
+
+        PlayerPrefs.SetInt("FireRate", 0);
+        PlayerPrefs.SetInt("Damage", 0);
+        PlayerPrefs.SetInt("NumOfBullets", 0);
+        PlayerPrefs.SetInt("Shield", 0);
+        PlayerPrefs.SetInt("FireRateBoost", 0);
+        PlayerPrefs.SetInt("PenetratingShots", 0);
+    }
+
     private int[] GetUpgradeLevel()
     {
         int[] upgradeLevels = new int[6];
@@ -133,12 +148,23 @@ public class StatUpgradeMenu : MonoBehaviour
     }
 
     public void Upgrade()
-    {
+    { /*
         WWWForm form = new WWWForm();
         form.AddField("upgrade", ((int)selectedStatType).ToString());
 
         loadingPanel.StartLoading("Carregando...");
         StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player/upgrade", form, FinishUpgrade, LoadError));
+        */
+
+        int index = (int)selectedStatType;
+        Upgrade selectedStat = upgradeableStats[index];
+        playerStats.money -= selectedStat.cost[playerStats.upgradeLevel[index]];
+        PlayerPrefs.SetInt("Money", playerStats.money);
+        
+        playerStats.upgradeLevel[index]++;
+        PlayerPrefs.SetInt(selectedStatType.ToString(), playerStats.upgradeLevel[index]);
+
+        FinishUpgrade(playerStats);
     }
 
     private void FinishUpgrade(PlayerStats player)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1231,7 +1231,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 93361740}
   m_OnClick:
@@ -1996,10 +1996,10 @@ MonoBehaviour:
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
-    m_NormalTrigger: open
-    m_HighlightedTrigger: close
+    m_NormalTrigger: close
+    m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 142415172}
   m_OnClick:
@@ -3086,7 +3086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &196352932
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8123,10 +8123,10 @@ MonoBehaviour:
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
-    m_NormalTrigger: open
-    m_HighlightedTrigger: close
+    m_NormalTrigger: close
+    m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 681388305}
   m_OnClick:
@@ -13224,7 +13224,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1134834431}
   m_OnClick:
@@ -14560,10 +14560,10 @@ MonoBehaviour:
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
-    m_NormalTrigger: open
-    m_HighlightedTrigger: close
+    m_NormalTrigger: close
+    m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1256900379}
   m_OnClick:
@@ -16410,7 +16410,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1404785402}
   m_OnClick:
@@ -18961,7 +18961,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1651735106}
   m_OnClick:
@@ -20077,7 +20077,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1776581586}
   m_OnClick:
@@ -20414,7 +20414,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1855510436}
   m_OnClick:
@@ -20554,8 +20554,8 @@ MonoBehaviour:
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
-    m_NormalTrigger: open
-    m_HighlightedTrigger: close
+    m_NormalTrigger: close
+    m_HighlightedTrigger: open
     m_PressedTrigger: click
     m_DisabledTrigger: Disabled
   m_Interactable: 1
@@ -22015,7 +22015,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 2084422469}
   m_OnClick:
@@ -22623,7 +22623,7 @@ MonoBehaviour:
     m_NormalTrigger: close
     m_HighlightedTrigger: open
     m_PressedTrigger: click
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: reset
   m_Interactable: 1
   m_TargetGraphic: {fileID: 2119931777}
   m_OnClick:
