@@ -133,7 +133,8 @@ public class Hexagon : MonoBehaviour
 
                     Time.timeScale = 0;
                     loadingPanel.StartLoading("Carregando...");
-                    StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, ShowScore, SubmitScoreError));
+                    //StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, ShowScore, SubmitScoreError));
+                    ShowScore();
                 }
                 else
                 {
@@ -150,7 +151,8 @@ public class Hexagon : MonoBehaviour
                 
                 Time.timeScale = 0;
                 loadingPanel.StartLoading("Carregando...");
-                StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+                GoToUpgradesScene();
+                //StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
             }
         }
         else
@@ -161,7 +163,9 @@ public class Hexagon : MonoBehaviour
 
             Time.timeScale = 0;
             loadingPanel.StartLoading("Carregando...");
-            StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
+
+            GoToUpgradesScene();
+            //StartCoroutine(NetworkManager.PostRequest<PlayerStats>("/player", form, GoToUpgradesScene, SubmitScoreError));
         }
     }
 
@@ -175,6 +179,13 @@ public class Hexagon : MonoBehaviour
     }
 
     private void ShowScore(PlayerStats player)
+    {
+        loadingPanel.StopLoading();
+        scorePanel.SetActive(true);
+        scoreText.text = "Pontuação:\n" + ScoreBoard.instance.Score.ToString();
+    }
+
+    private void ShowScore()
     {
         loadingPanel.StopLoading();
         scorePanel.SetActive(true);

@@ -51,8 +51,8 @@ public class PowerUps : MonoBehaviour
         Time.timeScale = 0;
         loadingPanel.StartLoading("Carregando...");
         Pause.instance.CanChangeState = false;
-        StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
-        
+        //StartCoroutine(NetworkManager.GetRequest<PlayerStats>("/player", GetDataCallback, Error));
+        GetDataCallback(StatUpgradeMenu.instance.playerStats);
     }
     
     private void Error(string errorMessage)

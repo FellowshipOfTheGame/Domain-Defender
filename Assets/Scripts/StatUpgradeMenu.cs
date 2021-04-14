@@ -37,7 +37,7 @@ public class StatUpgradeMenu : MonoBehaviour
     [SerializeField] UIReferences uiReferences;
 
     [SerializeField] GameObject selectionIcon;
-    [SerializeField] PlayerStats playerStats;
+    [SerializeField] public PlayerStats playerStats;
     [SerializeField] GameObject defaultSelected;
     public static Upgrade[] upgradeableStats;
     StatType selectedStatType;
