@@ -120,7 +120,7 @@ public class Hexagon : MonoBehaviour
             if (score != -1  && coins != -1)
             {
                 if (score != 0)
-                {
+                {   /*
                     WWWForm form = new WWWForm();
                     Upgrades upgrades = new Upgrades();
                     upgrades.upgrades = StatUpgradeMenu.upgradeableStats;
@@ -129,7 +129,14 @@ public class Hexagon : MonoBehaviour
                     form.AddField("money", coins.ToString());
                     form.AddField("upgrades", JsonUtility.ToJson(upgrades));
                     form.AddField("levels", JsonUtility.ToJson(PowerUps.playerStats));
-                    form.AddField("hash", Hash());
+                    form.AddField("hash", Hash()); */
+
+                    int highscore = PlayerPrefs.GetInt("Highscore");
+                    int money = PlayerPrefs.GetInt("Money");
+
+                    if (score > highscore) PlayerPrefs.SetInt("Highscore", score);
+                    PlayerPrefs.SetInt("Money", money + coins);
+
 
                     Time.timeScale = 0;
                     loadingPanel.StartLoading("Carregando...");
